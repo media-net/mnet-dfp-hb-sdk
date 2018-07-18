@@ -1,0 +1,6 @@
+framework module MNetBaseAdSdk {
+  umbrella header "MNetBaseAdSdk-umbrella.h"
+
+  export *
+  module * { export * }
+}

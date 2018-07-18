@@ -1,0 +1,6 @@
+framework module MNetJSONModeller {
+  umbrella header "MNetJSONModeller-umbrella.h"
+
+  export *
+  module * { export * }
+}

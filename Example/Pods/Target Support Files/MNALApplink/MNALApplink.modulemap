@@ -1,0 +1,6 @@
+framework module MNALApplink {
+  umbrella header "MNALApplink-umbrella.h"
+
+  export *
+  module * { export * }
+}

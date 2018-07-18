@@ -1,0 +1,6 @@
+framework module MNetCMPConsentTool {
+  umbrella header "MNetCMPConsentTool-umbrella.h"
+
+  export *
+  module * { export * }
+}

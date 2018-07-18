@@ -1,0 +1,17 @@
+use_frameworks!
+
+source 'https://github.com/media-net/mnet-pod-specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'MNetDfpHbSdk_Example' do
+  pod 'MNetDfpHbSdk', :path => '../'
+  pod 'MNetCMPConsentTool'
+  pod 'MBProgressHUD'
+  pod 'Toast', '~> 3.1.0'
+
+  platform :ios, '8.0'
+
+  target 'MNetDfpHbSdk_Tests' do
+    inherit! :search_paths
+  end
+end

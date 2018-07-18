@@ -1,0 +1,34 @@
+{
+  "name": "MNetDfpHbSdk",
+  "version": "0.1.0",
+  "summary": "A short description of MNetDfpHbSdk.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/media-net/ios-dfp-hb-sdk",
+  "license": {
+    "type": "Copyright",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Nithin": "nithin.g@media.net",
+    "Kunal": "kunal.ch@media.net"
+  },
+  "source": {
+    "git": "https://github.com/media-net/ios-dfp-hb-sdk.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MNetDfpHbSdk/Classes/**/*",
+  "frameworks": "CoreLocation",
+  "static_framework": true,
+  "cocoapods_version": ">= 1.4.0",
+  "dependencies": {
+    "MNetBaseAdSdk": [
+      "0.5.0"
+    ],
+    "Google-Mobile-Ads-SDK": [
+      ">= 7.0"
+    ]
+  }
+}
