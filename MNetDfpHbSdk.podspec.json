@@ -1,0 +1,31 @@
+{
+    "authors": {
+        "Kunal": "kunal.ch@media.net",
+        "Nithin": "nithin.g@media.net"
+    },
+    "dependencies": {
+        "Google-Mobile-Ads-SDK": [
+            ">= 7.0"
+        ]
+    },
+    "description": "TODO: Add long description of the pod here.",
+    "frameworks": "CoreLocation",
+    "homepage": "https://github.com/media-net/ios-dfp-hb-sdk",
+    "ios": {
+        "vendored_frameworks": "MNetDfpHbSdk/ios/MNetDfpHbSdk.framework"
+    },
+    "license": {
+        "file": "LICENSE",
+        "type": "Copyright"
+    },
+    "name": "MNetDfpHbSdk",
+    "platforms": {
+        "ios": "8.0"
+    },
+    "source": {
+        "git": "https://github.com/media-net/mnet-dfp-hb-sdk.git",
+        "tag": "0.1.0"
+    },
+    "summary": "A short description of MNetDfpHbSdk.",
+    "version": "0.1.0"
+}
