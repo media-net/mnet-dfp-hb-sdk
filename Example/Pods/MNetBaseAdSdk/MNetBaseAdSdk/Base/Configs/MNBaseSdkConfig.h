@@ -76,5 +76,7 @@
 - (NSInteger)getVendorId;
 - (NSArray *_Nullable)getWkWebviewSupportedVersions;
 - (BOOL)isSwizzlingEnabled;
+- (BOOL)isPulseEnabled;
+- (NSArray<NSString *> *_Nullable)fetchPulseEventWhiteList;
 
 @end

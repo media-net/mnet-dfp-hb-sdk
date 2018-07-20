@@ -49,8 +49,18 @@ typedef NS_ENUM(NSInteger, MNetDfpHbSubjectToGdpr) {
 + (void)enableLogs:(BOOL)enabled;
 
 /// Call this method to set the consent for Media.Net.
-/// Provide the consentString.
-/// Choose one of the available values for consentStatus and subjectToGdpr.
+/// Parameters -
+/// ConsentString - NSString representing the consent string
+/// ConsentStatus - An enum to specify the consent status.
+///                 Enum options -
+///                 MNetDfpHbGdprConsentStatusUnknown // Consent is UNKNOWN
+///                 MNetDfpHbGdprConsentStatusGiven   // Consented
+///                 MNetDfpHbGdprConsentStatusRevoked // Not consented
+/// SubjectToGdpr - An enum to specify if subject to GDPR
+///                 Enum options -
+///                 MNetDfpHbSubjectoToGdprUnknown // GDPR applicability is UNKNOWN
+///                 MNetDfpHbSubjectToGdprDisabled // GDPR not applicable
+///                 MNetDfpHbSubjectToGdprEnabled  // GDPR applicable
 + (void)updateGdprConsentString:(NSString *)consentString
                   consentStatus:(MNetDfpHbGdprConsentStatus)status
                   subjectToGdpr:(MNetDfpHbSubjectToGdpr)subjectToGdpr;

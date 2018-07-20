@@ -6,14 +6,10 @@
 //
 
 #import "MNBaseDataPrivacy.h"
+#import "MNBase.h"
 #import "MNBaseLogger.h"
 #import "MNBaseSdkConfig.h"
-
-NSString *const kMNBaseIABConsentCMPPresentKey     = @"IABConsent_CMPPresent";
-NSString *const kMNBaseIABConsentStringKey         = @"IABConsent_ConsentString";
-NSString *const kMNBaseIABConsentSubjectToGDPRKey  = @"IABConsent_SubjectToGDPR";
-NSString *const kMNBaseIABParsedVendorConsentsKey  = @"IABConsent_ParsedVendorConsents";
-NSString *const kMNBaseIABParsedPurposeConsentsKey = @"IABConsent_ParsedPurposeConsents";
+#import <AdSupport/ASIdentifierManager.h>
 
 static MNBaseDataPrivacy *sInstance = nil;
 
@@ -23,7 +19,7 @@ static MNBaseDataPrivacy *sInstance = nil;
 
 @property (atomic) NSInteger consentStatus;
 
-@property (atomic) NSUInteger subjectToGdpr;
+@property (atomic) NSInteger subjectToGdpr;
 @end
 
 @implementation MNBaseDataPrivacy
@@ -54,9 +50,9 @@ static MNBaseDataPrivacy *sInstance = nil;
                           consentStatus:(MNBaseGdprConsentStatus)status
                           subjectToGdpr:(MNBaseSubjectToGdpr)gdpr {
 
-    MNLogD(@"MNet consent string %@", consentString);
-    MNLogD(@"MNet consent status %ld", (long) status);
-    MNLogD(@"MNet subject to gdpr %ld", (long) gdpr);
+    MNLogD(@"GDPR: MANUAL: MNet consent string %@", consentString);
+    MNLogD(@"GDPR: MANUAL: MNet consent status %ld", (long) status);
+    MNLogD(@"GDPR: MANUAL: MNet subject to gdpr %ld", (long) gdpr);
 
     self.consentStatus = status;
     self.subjectToGdpr = gdpr;
@@ -76,16 +72,33 @@ static MNBaseDataPrivacy *sInstance = nil;
     return self.consentStr;
 }
 
-- (BOOL)checkIfConsentAvailable {
+- (BOOL)isGdprConsentGiven {
     return self.consentStatus == MNBaseGdprConsentStatusGiven;
 }
 
 - (BOOL)isSubjectToGdpr {
-    return self.subjectToGdpr == MNBaseSubjectToGdprEnabled;
+    return self.subjectToGdpr != MNBaseSubjectToGdprDisabled;
 }
 
+- (BOOL)doesAppContainChildDirectedContent {
+    // If the base is not initialized, then child-directed-content is set to NO
+    return [MNBase isInitialized] && [[MNBase getInstance] appContainsChildDirectedContent];
+}
+
+- (BOOL)isAdTrackingEnabled {
+    return [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled];
+}
+
+- (BOOL)isGdprEnabled {
+    return ([self isSubjectToGdpr] && NO == [self isGdprConsentGiven]);
+}
+
+/// Returns YES if any of
+/// - subject to gdpr is enabled & gdpr consent is not available
+/// - App contains child-directed content
+/// - Limited ad-tracking is enabled
 - (BOOL)doNoTrack {
-    return [self isSubjectToGdpr] && ![self checkIfConsentAvailable];
+    return ([self isGdprEnabled] || [self doesAppContainChildDirectedContent] || NO == [self isAdTrackingEnabled]);
 }
 
 @end

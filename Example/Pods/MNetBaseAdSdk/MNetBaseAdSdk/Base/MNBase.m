@@ -12,7 +12,6 @@
 #import "MNBaseAppCrashCatcher.h"
 #import "MNBaseDataPrivacy.h"
 #import "MNBaseDiskLRUCache.h"
-#import "MNBaseFingerprint.h"
 #import "MNBaseHttpClient.h"
 #import "MNBaseLocationDataTracker.h"
 #import "MNBaseLogger.h"
@@ -27,7 +26,7 @@
 #define MNET_BASE_AD_SDK_VERSION_CODE 1
 // TODO MNBase right now keeping the base sdk version same as current ad sdk. Need to discuss the versioning of sdk's
 // according to revamp structure
-#define MNET_BASE_AD_SDK_VERSION_NAME @"0.5.0"
+#define MNET_BASE_AD_SDK_VERSION_NAME @"0.6.0"
 
 @interface MNBase ()
 @property NSString *visitId;
@@ -79,6 +78,10 @@ static MNBase *sInstance = nil;
       sInstance = [[self alloc] init];
     });
     return sInstance;
+}
+
++ (BOOL)isInitialized {
+    return sInstance != nil;
 }
 
 + (instancetype)initWithCustomerId:(NSString *)customerId
@@ -144,7 +147,7 @@ static MNBase *sInstance = nil;
 
     [MNBaseAppCrashCatcher startAppCrashCatcher];
 
-    [MNBaseDataPrivacy initDataPrivacy];
+    [MNBaseDataPrivacy getSharedInstance];
 
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
@@ -163,8 +166,6 @@ static MNBase *sInstance = nil;
     [MNBaseDiskLRUCache sharedLRUCache];
 
     [MNBaseAdViewStore getsharedInstance];
-
-    [MNBaseFingerprint getInstance];
 
     if ([[self getInstance] appContainsChildDirectedContent] == NO) {
         [MNBaseLocationDataTracker startLocationUpdates];

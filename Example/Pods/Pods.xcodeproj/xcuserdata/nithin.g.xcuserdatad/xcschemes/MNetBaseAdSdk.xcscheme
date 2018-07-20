@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "75C4ECCB3E3C681C86696CF60B5240ED"
+               BlueprintIdentifier = "E44DB2624575E631F38448C846125DD8"
                BlueprintName = "MNetBaseAdSdk"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "MNetBaseAdSdk.framework">

@@ -14,9 +14,6 @@
 @interface MNBasePulseHttp () <MNBasePulseStoreDelegate>
 @property (atomic) MNBasePulseStore *pulseStore;
 
-+ (BOOL)isRegulatedForPulseEvent:(MNBasePulseEvent *)pulseEvent;
-+ (NSArray<NSString *> *)getRegulatedPulseEvents;
-
 /// This method will be called whenever pulse http requests need to be prevented
 /// like in the case of testing.
 - (void)__stopFromMakingRequestsForTests;
@@ -26,6 +23,8 @@
                              andTimeSinceFirstEntry:(NSTimeInterval)timestamp;
 
 - (void)limitExceeded:(MNBasePulseStoreLimitType)limitExceededType withEntries:(NSArray<NSData *> *)entries;
+
+- (BOOL)isEventValid:(MNBasePulseEvent *)pulseEvent;
 
 @end
 

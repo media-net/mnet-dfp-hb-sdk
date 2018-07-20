@@ -273,6 +273,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = gnithin;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = PF48527554;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -541,6 +544,7 @@
 			baseConfigurationReference = CC673DA51C8CB3213AFCEFE3 /* Pods-MNetDfpHbSdk_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PF48527554;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MNetDfpHbSdk/MNetDfpHbSdk-Prefix.pch";
 				INFOPLIST_FILE = "MNetDfpHbSdk/MNetDfpHbSdk-Info.plist";
@@ -556,6 +560,7 @@
 			baseConfigurationReference = 5B315F28E00F0906FE33CD7C /* Pods-MNetDfpHbSdk_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PF48527554;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MNetDfpHbSdk/MNetDfpHbSdk-Prefix.pch";
 				INFOPLIST_FILE = "MNetDfpHbSdk/MNetDfpHbSdk-Info.plist";

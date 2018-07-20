@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0104D9F282BF38A79307C984BE057C38"
+               BlueprintIdentifier = "F64EE52EB4930736FAC66E4B949B1B01"
                BlueprintName = "MNetJSONModeller"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "MNetJSONModeller.framework">

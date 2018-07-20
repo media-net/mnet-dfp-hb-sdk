@@ -20,15 +20,32 @@ typedef NS_ENUM(NSInteger, MNBaseSubjectToGdpr) {
 };
 
 @interface MNBaseDataPrivacy : NSObject
-// Methods
-+ (void)initDataPrivacy;
+
 + (instancetype)getSharedInstance;
-// Returns consent string
+
+/// Returns consent string. Return empty string if none is available.
 - (NSString *)getConsentString;
-// Returns YES or NO based on avialable consent
-- (BOOL)checkIfConsentAvailable;
-// Returns YES or NO based on data tracking enabled
+
+/// Returns if gdpr-consent is given
+- (BOOL)isGdprConsentGiven;
+
+/// Returns if subject to gdpr
+- (BOOL)isSubjectToGdpr;
+
+/// Returns if app contains child-directed content
+- (BOOL)doesAppContainChildDirectedContent;
+
+/// Returns if limited ad-tracking is enabled
+- (BOOL)isAdTrackingEnabled;
+
+- (BOOL)isGdprEnabled;
+
+/// Returns YES if any of
+/// - subject to gdpr is enabled & gdpr consent is not available
+/// - App contains child-directed content
+/// - Limited ad-tracking is enabled
 - (BOOL)doNoTrack;
+
 - (void)manuallyUpdateGdprConsentString:(NSString *)consentString
                           consentStatus:(MNBaseGdprConsentStatus)status
                           subjectToGdpr:(MNBaseSubjectToGdpr)gdpr;

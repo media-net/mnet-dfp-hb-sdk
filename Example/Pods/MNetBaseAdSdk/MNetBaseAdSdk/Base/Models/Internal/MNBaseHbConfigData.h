@@ -37,4 +37,7 @@
 @property (atomic) MNJMBoolean *mnetAgBidEnabled;
 @property (atomic) MNJMBoolean *euDoNotTrack;
 @property (atomic) MNJMBoolean *isSwizzlingVcEnabled;
+
+@property (atomic) MNJMBoolean *isPulseEnabled;
+@property (atomic) NSArray<NSString *> *pulseWhiteList;
 @end

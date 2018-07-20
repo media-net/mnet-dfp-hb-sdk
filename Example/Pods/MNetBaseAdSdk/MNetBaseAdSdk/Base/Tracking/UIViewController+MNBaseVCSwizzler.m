@@ -46,18 +46,23 @@ static UIViewController *instance;
 }
 
 - (void)initializeConfigListeners {
-    sdkConfigNotificationObj =
-        [MNBaseNotificationManager addObserverToNotification:MNBaseNotificationSdkConfigUpdated
-                                                   withBlock:^(NSNotification *_Nonnull notificationObj) {
-                                                     MNLogD(@"SWIZZLER: Notification update -> ");
-                                                     if ([[MNBaseSdkConfig getInstance] isSwizzlingEnabled]) {
-                                                         MNLogD(@"SWIZZLER: swizzleVCMethods called");
-                                                         [self swizzleVCMethods];
-                                                     } else {
-                                                         MNLogD(@"SWIZZLER: un-swizzleVCMethods called");
-                                                         [self unswizzleVCMethods];
-                                                     }
-                                                   }];
+    sdkConfigNotificationObj = [MNBaseNotificationManager
+        addObserverToNotification:MNBaseNotificationSdkConfigUpdated
+                        withBlock:^(NSNotification *_Nonnull notificationObj) {
+                          @try {
+                              MNLogD(@"SWIZZLER: Notification update -> ");
+                              if ([[MNBaseSdkConfig getInstance] isSwizzlingEnabled]) {
+                                  MNLogD(@"SWIZZLER: swizzleVCMethods called");
+                                  [self swizzleVCMethods];
+                              } else {
+                                  MNLogD(@"SWIZZLER: un-swizzleVCMethods called");
+                                  [self unswizzleVCMethods];
+                              }
+                          } @catch (NSException *swizzlerException) {
+                              MNLogE(@"EXCEPTION - MNBaseVCSwizzler when changing swizzler status - %@",
+                                     swizzlerException);
+                          }
+                        }];
 }
 
 - (void)swizzleVCMethods {

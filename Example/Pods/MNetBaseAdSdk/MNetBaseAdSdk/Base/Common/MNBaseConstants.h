@@ -183,4 +183,8 @@
 
 // Default for - is swizzling for view-controllers is enabled
 #define DEFAULT_IS_SWIZZLING_VC_ENABLED NO
+
+// Default pulse
+#define DEFAULT_PULSE_ENABLED NO
+
 @end

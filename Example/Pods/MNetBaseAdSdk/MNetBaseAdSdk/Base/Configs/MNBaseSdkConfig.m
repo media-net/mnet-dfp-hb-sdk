@@ -740,4 +740,19 @@ static NSArray<NSString *> *europeanUnionCountryCodes;
     return DEFAULT_IS_SWIZZLING_VC_ENABLED;
 }
 
+- (BOOL)isPulseEnabled {
+    if (self.hbConfigData != nil && [self.hbConfigData isPulseEnabled] != nil) {
+        return [[self.hbConfigData isPulseEnabled] isYes];
+    }
+    return DEFAULT_PULSE_ENABLED;
+}
+
+- (NSArray<NSString *> *_Nullable)fetchPulseEventWhiteList {
+    if (self.hbConfigData != nil && [self.hbConfigData pulseWhiteList] != nil &&
+        [[self.hbConfigData pulseWhiteList] count] > 0) {
+        return [self.hbConfigData pulseWhiteList];
+    }
+    return nil;
+}
+
 @end

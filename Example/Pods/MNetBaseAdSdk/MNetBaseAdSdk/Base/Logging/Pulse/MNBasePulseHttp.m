@@ -8,6 +8,7 @@
 
 #import "MNBase.h"
 #import "MNBaseConstants.h"
+#import "MNBaseDataPrivacy.h"
 #import "MNBaseHttpClient.h"
 #import "MNBaseLog.h"
 #import "MNBaseLogger.h"
@@ -40,10 +41,6 @@ static MNBasePulseHttp *instance;
         return;
     }
     NSArray *eventsList = [[NSArray alloc] initWithObjects:event, nil];
-    if ([event.tag isEqualToString:MNBasePulseEventError]) {
-        // Explicitly pushing pulse events to remote for pulseEventType - "error"
-        [self makePulseRequestWithEvent:event];
-    }
     [self logEventsWithArray:eventsList];
 }
 
@@ -53,7 +50,6 @@ static MNBasePulseHttp *instance;
     }
     NSArray<NSData *> *filteredEventsList = [self getFilteredDataEntriesFromPulseEventsList:eventsList];
     if (filteredEventsList == nil || [filteredEventsList count] == 0) {
-        MNLogD(@"PULSE: Skipping events since filteredEventsList is empty!");
         return;
     }
     [self addEntriesIntoPulseStore:filteredEventsList];
@@ -83,13 +79,18 @@ static MNBasePulseHttp *instance;
         MNLogD(@"PULSE: Not making api call, got nil pulse event");
         return;
     }
-    NSArray *eventsList                = [[NSArray alloc] initWithObjects:event, nil];
-    NSArray<NSData *> *filteredEntries = [self getFilteredDataEntriesFromPulseEventsList:eventsList];
-    if (filteredEntries == nil || [filteredEntries count] == 0) {
-        MNLogD(@"PULSE: Not making api call, got nil entries");
-        return;
+    @try {
+        NSData *eventData = [self getEventData:event];
+        if (eventData == nil) {
+            MNLogE(@"PULSE: Not sending event %@ since event data is nil!", event);
+            return;
+        }
+        NSMutableArray<NSData *> *eventEntries = [[NSMutableArray alloc] init];
+        [eventEntries addObject:eventData];
+        [self postPulseEventsForEntries:eventEntries addBackToPulseStore:NO];
+    } @catch (NSException *e) {
+        MNLogD(@"PULSE: Exception when converting the pulse-event to event-data");
     }
-    [self postPulseEventsForEntries:filteredEntries addBackToPulseStore:NO];
 }
 
 #pragma mark - PulseStoreDelegates
@@ -185,12 +186,18 @@ static MNBasePulseHttp *instance;
 - (NSArray<NSData *> *)getFilteredDataEntriesFromPulseEventsList:(NSArray<MNBasePulseEvent *> *)eventsList {
     NSMutableArray<NSData *> *filteredEventsList = [NSMutableArray new];
     for (MNBasePulseEvent *event in eventsList) {
-        if ([[self class] isRegulatedForPulseEvent:event]) {
-            MNLogD(@"PULSE: Skipping regulated event - %@", [event tag]);
+        if ([event.tag isEqualToString:MNBasePulseEventError]) {
+            // Explicitly pushing pulse events to remote for pulseEventType - "error"
+            [self makePulseRequestWithEvent:event];
+        }
+
+        if (NO == [self isEventValid:event]) {
+            MNLogD(@"PULSE: Skipping invalid event - %@", (event != nil) ? [event tag] : nil);
             continue;
         }
+        MNLogD(@"PULSE: Sending - %@", (event != nil) ? [event tag] : nil);
         @try {
-            NSData *eventData = [NSKeyedArchiver archivedDataWithRootObject:event];
+            NSData *eventData = [self getEventData:event];
             if (eventData != nil) {
                 [filteredEventsList addObject:eventData];
             }
@@ -200,47 +207,63 @@ static MNBasePulseHttp *instance;
         }
     }
     if ([filteredEventsList count] == 0) {
-        MNLogD(@"PULSE: Skipping events since filteredEventsList is empty!");
         return nil;
     }
     return [filteredEventsList copy];
 }
 
-+ (BOOL)isRegulatedForPulseEvent:(MNBasePulseEvent *)pulseEvent {
-    if ([[MNBase getInstance] appContainsChildDirectedContent] == NO || pulseEvent == nil) {
-        return NO;
-    }
-    NSArray<NSString *> *regulatedEventTypes = [self getRegulatedPulseEvents];
-    NSString *eventType                      = pulseEvent.tag;
-
-    if (regulatedEventTypes == nil || [regulatedEventTypes count] == 0) {
-        return NO;
-    }
-
-    if ([regulatedEventTypes containsObject:eventType]) {
-        return YES;
-    }
-    return NO;
+- (NSData *)getEventData:(MNBasePulseEvent *)event {
+    return [NSKeyedArchiver archivedDataWithRootObject:event];
 }
 
-// These pulse-events need to be skipped if child-content-policy is on.
-// This is basically a black-list.
-static NSArray<NSString *> *regulatedPulseEvents;
+- (BOOL)isEventValid:(MNBasePulseEvent *)pulseEvent {
+    if (pulseEvent == nil) {
+        MNLogD(@"PULSE: VALIDITY: NO, Pulse event is empty!");
+        return NO;
+    }
 
-+ (NSArray<NSString *> *)getRegulatedPulseEvents {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-      regulatedPulseEvents = @[
-          MNBasePulseEventNetwork,
-          MNBasePulseEventDevice,
-          MNBasePulseEventLocation,
-          MNBasePulseEventDeviceLang,
-          MNBasePulseEventTimezone,
-          MNBasePulseEventAddress,
-          MNBasePulseEventUserAgent,
-      ];
-    });
-    return regulatedPulseEvents;
+    // Special case for error events
+    if ([pulseEvent.tag isEqualToString:MNBasePulseEventError]) {
+        MNLogD(@"PULSE: VALIDITY: YES, %@", [pulseEvent tag]);
+        return YES;
+    }
+
+    if (NO == [[MNBaseSdkConfig getInstance] isPulseEnabled]) {
+        MNLogD(@"PULSE: VALIDITY: NO, Pulse is disabled! Cannot add entries into pulse!");
+        return NO;
+    }
+
+    // All events (except error) are invalid is do-not-track is YES
+    if ([[MNBaseDataPrivacy getSharedInstance] doNoTrack] == YES) {
+        MNLogD(@"PULSE: VALIDITY: NO, doNoTrack is enabled!");
+        return NO;
+    }
+
+    // Check if the event is white-listed
+    BOOL isWhiteListed = [self isEventWhiteListed:pulseEvent];
+    MNLogD(@"PULSE: VALIDITY: %@, whitelist event - %@", (isWhiteListed) ? @"YES" : @"NO", [pulseEvent tag]);
+    return isWhiteListed;
+}
+
+- (BOOL)isEventWhiteListed:(MNBasePulseEvent *)pulseEvent {
+    if (pulseEvent == nil) {
+        return NO;
+    }
+    NSArray<NSString *> *whiteListedEventNamesList = [[MNBaseSdkConfig getInstance] fetchPulseEventWhiteList];
+    if (whiteListedEventNamesList == nil || [whiteListedEventNamesList count] == 0) {
+        return NO;
+    }
+
+    NSString *currentEventName = pulseEvent.tag;
+    if (currentEventName == nil) {
+        return NO;
+    }
+    for (NSString *whiteListedEventName in whiteListedEventNamesList) {
+        if ([currentEventName caseInsensitiveCompare:whiteListedEventName] == NSOrderedSame) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 static BOOL doNotMakeHttpRequests = NO;

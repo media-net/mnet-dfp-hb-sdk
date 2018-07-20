@@ -7,6 +7,7 @@
 //
 
 #import "MNBaseAdIdManager.h"
+#import "MNBaseDataPrivacy.h"
 #import "MNBaseDeviceInfo.h"
 #import "MNBaseLogger.h"
 #import "MNBaseMacroManager+Internal.h"
@@ -285,8 +286,7 @@ static MNBaseMacroManager *instance;
 
     // Replace advertising id macro
     MNBaseAdIdManager *adIdManager = [MNBaseAdIdManager getSharedInstance];
-    if ([MNBaseUtil isNil:[adIdManager getAdvertId]] == NO &&
-        [[MNBaseDeviceInfo getInstance] doNotTrackForEurope] == NO) {
+    if ([MNBaseUtil isNil:[adIdManager getAdvertId]] == NO && [[MNBaseDataPrivacy getSharedInstance] doNoTrack] == NO) {
         replacementMap[advertIdMacro]     = [adIdManager getAdvertId];
         replacementMap[advertIdHashMacro] = [[adIdManager getAdvertId] MD5];
     }

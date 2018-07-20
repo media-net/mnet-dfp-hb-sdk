@@ -78,6 +78,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Get the current base sdk version code
 + (NSUInteger)getBaseSdkVersionCode;
 
+/// Get status if the app is initialized
++ (BOOL)isInitialized;
+
 - (instancetype)init __attribute__((unavailable("Please use +initWithCustomerId:")));
 
 NS_ASSUME_NONNULL_END

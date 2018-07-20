@@ -73,6 +73,9 @@ static NSUInteger lruCacheLimit = 20;
 
         [propertyDetailsList addObject:detail];
     }
+    if (classProperties != nil) {
+        free(classProperties);
+    }
     return [NSArray arrayWithArray:propertyDetailsList];
 }
 

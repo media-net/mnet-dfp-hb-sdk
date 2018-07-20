@@ -40,6 +40,7 @@
         _isAutoHbMopubEnabled    = [MNJMBoolean createWithBool:DEFAULT_AUTO_HB_MOPUB_ENABLED];
         _euDoNotTrack            = [MNJMBoolean createWithBool:DEFAULT_DO_NOT_TRACK_EU];
         _isSwizzlingVcEnabled    = [MNJMBoolean createWithBool:DEFAULT_IS_SWIZZLING_VC_ENABLED];
+        _isPulseEnabled          = [MNJMBoolean createWithBool:DEFAULT_PULSE_ENABLED];
     }
     return self;
 }
@@ -60,6 +61,8 @@
         @"ybncaAdTimeout" : @"ybnca_ad_timeout",
         @"shouldShimmer" : @"mnet_should_shimmer",
         @"euDoNotTrack" : @"eudnt",
+        @"isPulseEnabled" : @"enable_pulse",
+        @"pulseWhiteList" : @"wh_p_ev",
     };
 }
 
@@ -67,6 +70,7 @@
     return @{
         @"adUnitConfigDataList" : [MNJMCollectionsInfo instanceOfArrayWithClassType:[MNBaseAdUnitConfigData class]],
         @"defaultBids" : [MNJMCollectionsInfo instanceOfArrayWithClassType:[MNBaseDefaultBid class]],
+        @"pulseWhiteList" : [MNJMCollectionsInfo instanceOfArrayWithClassType:[NSString class]],
     };
 }
 

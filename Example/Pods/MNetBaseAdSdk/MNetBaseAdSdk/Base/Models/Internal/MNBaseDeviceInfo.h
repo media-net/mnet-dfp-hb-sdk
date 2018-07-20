@@ -62,9 +62,7 @@
 
 @property (atomic) NSString *osVersion;
 
-@property (atomic) NSNumber *limitedAdTracking;
-
-@property (atomic) BOOL doNotTrackForEurope;
+@property (atomic) NSNumber *disableAdTracking;
 
 // Connection type mapping
 // 0 Unknown
@@ -83,7 +81,5 @@
 
 // Get singelton instance
 + (id)getInstance;
-
-- (void)updateLimitedAdTracking;
 
 @end

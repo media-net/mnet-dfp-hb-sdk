@@ -27,7 +27,6 @@
     __block MNBaseDeviceInfo *deviceInfo;
     void (^deviceInfoBlock)(void) = ^{
       deviceInfo = [MNBaseDeviceInfo getInstance];
-      [deviceInfo updateLimitedAdTracking];
     };
 
     // Need to always fetch from the main thread (Accesses UIKit)

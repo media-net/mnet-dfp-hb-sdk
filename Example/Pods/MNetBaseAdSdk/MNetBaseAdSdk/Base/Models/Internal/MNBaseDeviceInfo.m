@@ -28,10 +28,7 @@
 #import <sys/utsname.h>
 
 @interface MNBaseDeviceInfo ()
-@property (atomic) NSString *ipv4Starred;
-// This flag imitates the isAdvertisingTrackingEnabled flag from user settings
-// Flag is YES if tracking is allowed else it is set to NO
-@property (atomic) BOOL isAdvertisingTrackingEnabled;
+@property (atomic) NSString *__ipv4Starred;
 @end
 
 @implementation MNBaseDeviceInfo
@@ -48,6 +45,15 @@
     dispatch_once(&onceToken, ^{
       sharedInstance = [[self alloc] init];
     });
+
+    if (sharedInstance != nil) {
+        MNLogD(@"PRIVACY: Printing privacy details from device-info");
+        MNLogD(@"PRIVACY: child directed : %@", [sharedInstance isChildDirected] ? @"YES" : @"NO");
+        MNLogD(@"PRIVACY: GDPR-enabled : %@", [[MNBaseDataPrivacy getSharedInstance] isGdprEnabled] ? @"YES" : @"NO");
+        MNLogD(@"PRIVACY: Is ad tracking enabled : %@",
+               [[MNBaseDataPrivacy getSharedInstance] isAdTrackingEnabled] ? @"YES" : @"NO");
+        MNLogD(@"PRIVACY: Do not track : %@", [sharedInstance disableAdTracking]);
+    }
     return sharedInstance;
 }
 
@@ -79,7 +85,7 @@
     NSString *ipv4Str = MNBaseGetIPAddress();
     [self setIpv4Address:ipv4Str];
 
-    self.ipv4Starred = [self getStarredIPV4:ipv4Str];
+    self.__ipv4Starred = [self getStarredIPV4:ipv4Str];
 
     // getting hardware version
     [self setHardwareVersion:MNBaseGetDeviceName()];
@@ -158,21 +164,9 @@
     return ipv4;
 }
 
-- (void)updateLimitedAdTracking {
-    self.isAdvertisingTrackingEnabled = [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled];
-    MNLogD(@"Limited Ad Tracking Enabled : %@", self.isAdvertisingTrackingEnabled ? @"YES" : @"NO");
-    self.doNotTrackForEurope = [[MNBaseDataPrivacy getSharedInstance] doNoTrack];
-    MNLogD(@"MNBase: IDFA do not track for europe : %@", self.doNotTrackForEurope ? @"YES" : @"NO");
-    MNLogD(@"MNBase: IDFA child directed : %@", [self isChildDirected] ? @"YES" : @"NO");
-    int limitedAdTracking =
-        (!self.isAdvertisingTrackingEnabled || [self isChildDirected] || self.doNotTrackForEurope) ? 1 : 0;
-    self.limitedAdTracking = [NSNumber numberWithInt:limitedAdTracking];
-    MNLogD(@"MNBase: IDFA limited ad tracking : %@", self.limitedAdTracking);
-}
-
-- (BOOL)isLimitedAdTrackingDisabled {
-    // Nil limitedAdTracking is treated as if tracking is disabled
-    return (self.limitedAdTracking == nil || [self.limitedAdTracking intValue] == 1);
+- (BOOL)isAdTrackingDisabled {
+    // Nil disableAdTracking is treated as if tracking is disabled
+    return self.disableAdTracking == nil || (self.disableAdTracking != nil && [self.disableAdTracking intValue] == 1);
 }
 
 // All the helpers
@@ -216,7 +210,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize geoLocation = _geoLocation;
 - (MNBaseGeoLocation *)geoLocation {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return nil;
     }
     return _geoLocation;
@@ -237,7 +231,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize mac = _mac;
 - (NSString *)mac {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return nil;
     }
     return _mac;
@@ -249,8 +243,8 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize ipv4Address = _ipv4Address;
 - (NSString *)ipv4Address {
-    if ([self isLimitedAdTrackingDisabled]) {
-        return self.ipv4Starred;
+    if ([self isAdTrackingDisabled]) {
+        return self.__ipv4Starred;
     }
     return _ipv4Address;
 }
@@ -261,7 +255,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize ipv6Address = _ipv6Address;
 - (NSString *)ipv6Address {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return nil;
     }
     return _ipv6Address;
@@ -273,7 +267,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize countryCode = _countryCode;
 - (NSString *)countryCode {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return nil;
     }
     return _countryCode;
@@ -285,7 +279,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize locationAllowed = _locationAllowed;
 - (int)locationAllowed {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return 0;
     }
     return _locationAllowed;
@@ -297,7 +291,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize carrier = _carrier;
 - (NSString *)carrier {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return nil;
     }
     return _carrier;
@@ -309,7 +303,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize deviceLang = _deviceLang;
 - (NSString *)deviceLang {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return nil;
     }
     return _deviceLang;
@@ -321,7 +315,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize connectionType = _connectionType;
 - (int)connectionType {
-    if ([self isLimitedAdTrackingDisabled]) {
+    if ([self isAdTrackingDisabled]) {
         return -1;
     }
     return _connectionType;
@@ -333,7 +327,7 @@ NSString *MNBaseGetIPAddress() {
 
 @synthesize advertId = _advertId;
 - (NSString *)advertId {
-    if (!self.isAdvertisingTrackingEnabled || self.doNotTrackForEurope) {
+    if ([self isAdTrackingDisabled]) {
         return @"";
     }
     return [[MNBaseAdIdManager getSharedInstance] getAdvertId];
@@ -343,22 +337,20 @@ NSString *MNBaseGetIPAddress() {
     _advertId = advertId;
 }
 
-@synthesize limitedAdTracking = _limitedAdTracking;
-- (NSNumber *)limitedAdTracking {
+@synthesize disableAdTracking = _disableAdTracking;
+- (NSNumber *)disableAdTracking {
     /*
-     NOTE: The limitedAdTracking is being set again in the getter
+     NOTE: The disableAdTracking is being set again in the getter
      because deviceInfo is cached. Doing this since there could be
      a possiblility of the child-directed flag to change.
      */
-    self.isAdvertisingTrackingEnabled = [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled];
-    int limitedAdTracking =
-        (!self.isAdvertisingTrackingEnabled || [self isChildDirected] || self.doNotTrackForEurope) ? 1 : 0;
-    _limitedAdTracking = [NSNumber numberWithInt:limitedAdTracking];
-    return _limitedAdTracking;
+    int disableAdTracking = [[MNBaseDataPrivacy getSharedInstance] doNoTrack] ? 1 : 0;
+    _disableAdTracking    = [NSNumber numberWithInt:disableAdTracking];
+    return _disableAdTracking;
 }
 
-- (void)setLimitedAdTracking:(NSNumber *)limitedAdTracking {
-    _limitedAdTracking = limitedAdTracking;
+- (void)setDisableAdTracking:(NSNumber *)disableAdTracking {
+    _disableAdTracking = disableAdTracking;
 }
 
 #pragma mark - Property map
@@ -414,7 +406,7 @@ NSString *MNBaseGetIPAddress() {
 
         @"geoLocation" : @"geo",
 
-        @"limitedAdTracking" : @"lmt"
+        @"disableAdTracking" : @"lmt"
     };
 }
 @end

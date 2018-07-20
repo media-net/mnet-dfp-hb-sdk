@@ -12,7 +12,6 @@
 #import "MNBaseAdSize.h"
 #import "MNBaseConstants.h"
 #import "MNBaseDataPrivacy.h"
-#import "MNBaseFingerprint.h"
 #import "MNBaseLocationDataTracker.h"
 #import "MNBaseLogger.h"
 #import "MNBaseSdkConfig.h"
@@ -150,15 +149,14 @@
       deviceInfo = [MNBaseDeviceInfo getInstance];
 
       // Update limited ad tracking flag
-      [deviceInfo updateLimitedAdTracking];
-      int gdpr = deviceInfo.doNotTrackForEurope ? 1 : 0;
+      int gdpr = [[MNBaseDataPrivacy getSharedInstance] isGdprEnabled] ? 1 : 0;
       MNLogD(@"MNBase: gdpr value - %d", gdpr);
       self.gdpr = [NSNumber numberWithInt:gdpr];
 
       self.gdprstring = [[MNBaseDataPrivacy getSharedInstance] getConsentString];
       MNLogD(@"MNBase: gdpr string %@", self.gdprstring);
 
-      int consent = [[MNBaseDataPrivacy getSharedInstance] checkIfConsentAvailable] ? 1 : 0;
+      int consent = [[MNBaseDataPrivacy getSharedInstance] isGdprConsentGiven] ? 1 : 0;
       MNLogD(@"MNBase: gdpr consent %d", consent);
       self.gdprconsent = [NSNumber numberWithInt:consent];
     };
@@ -178,12 +176,6 @@
         }
     }
     [self setDeviceInfo:deviceInfo];
-
-    // Fingerprint data
-    NSString *uuid = [[MNBaseFingerprint getInstance] getUUID];
-    if (uuid && ![uuid isEqualToString:@""]) {
-        self.uuid = uuid;
-    }
 
     // Setting test value
     if ([[MNBase getInstance] isTest]) {
