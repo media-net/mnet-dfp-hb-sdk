@@ -96,7 +96,7 @@ static NSArray<NSString *> *testDevicesList;
 - (void)loadDevicesList {
     NSMutableArray<NSString *> *devicesList = [@[
         // Iphone 5s
-        @"f97eacc0e37157c3124d3ddaeaca1ead",
+        @"c43d79026c4919f2c46a6a5884cbe2e9",
         // Iphone 7 Plus
         @"32eca1d7a94a81b5c9e8dbd1d8675a4b",
         // Iphone

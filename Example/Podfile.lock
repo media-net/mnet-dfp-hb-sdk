@@ -17,15 +17,15 @@ PODS:
   - Google-Mobile-Ads-SDK (7.31.0)
   - MBProgressHUD (1.1.0)
   - MNALApplink (0.13.7)
-  - MNetBaseAdSdk (0.5.0):
+  - MNetBaseAdSdk (0.6.0):
     - AFNetworking (= 3.1.0)
     - MNALApplink (= 0.13.7)
-    - MNetJSONModeller (= 1.1.5)
+    - MNetJSONModeller (= 1.1.6)
   - MNetCMPConsentTool (0.1.0)
-  - MNetDfpHbSdk (0.1.0):
+  - MNetDfpHbSdk (0.2.0):
     - Google-Mobile-Ads-SDK (>= 7.0)
-    - MNetBaseAdSdk (= 0.5.0)
-  - MNetJSONModeller (1.1.5)
+    - MNetBaseAdSdk (= 0.6.0)
+  - MNetJSONModeller (1.1.6)
   - Toast (3.1.0)
 
 DEPENDENCIES:
@@ -55,10 +55,10 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 6e529e748b45507a2ca904e0b5a52669ba3920c4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MNALApplink: 021097529324ecbc3ea1caaebf304f590d861c89
-  MNetBaseAdSdk: a36a860644177afbbf019e521ef0ae3364b9dde9
+  MNetBaseAdSdk: 9d6b510637f8af4e8459a0ea9bc78e45ed4a839a
   MNetCMPConsentTool: 157a7f1ddc245d756bf50e0c043bcc6640cc11c9
-  MNetDfpHbSdk: c65191cb04b87d2db073b31626725d2fc91f4909
-  MNetJSONModeller: 924fc3e382f6f2a6c83d6bb4277a767dea8562aa
+  MNetDfpHbSdk: 3f3dcae3032767093636758be5f3b2a18a9994a4
+  MNetJSONModeller: 470c7e65d54ab5732f724bfe23d286d9a5d5fd9c
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
 
 PODFILE CHECKSUM: ae38bf2a396d8dc83b1006067ec0b59cfcb3909b
