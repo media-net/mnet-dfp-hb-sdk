@@ -1,0 +1,4 @@
+framework module MNetDfpHbSdk{
+	header "MNetDfpHb.h"
+	header "MNetDfpBidder.h"
+}

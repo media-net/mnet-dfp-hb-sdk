@@ -30,6 +30,7 @@ typedef enum {
     MNBaseErrCodeInvalidAdUrl          = -2010,
     MNBaseErrCodeAdUrlRequestFailed    = -2011,
     MNBaseErrCodeYBNCATimeout          = -2012,
+    MNBaseErrCodeCSAFailForSetTimeout  = -2013,
 
     // HB error code
     MNBaseErrCodeHBLoadFailed = -3000,

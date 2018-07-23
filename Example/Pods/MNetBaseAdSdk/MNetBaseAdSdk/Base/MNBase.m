@@ -26,7 +26,7 @@
 #define MNET_BASE_AD_SDK_VERSION_CODE 1
 // TODO MNBase right now keeping the base sdk version same as current ad sdk. Need to discuss the versioning of sdk's
 // according to revamp structure
-#define MNET_BASE_AD_SDK_VERSION_NAME @"0.6.0"
+#define MNET_BASE_AD_SDK_VERSION_NAME @"0.8.0"
 
 @interface MNBase ()
 @property NSString *visitId;

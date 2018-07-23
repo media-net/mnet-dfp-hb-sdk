@@ -94,6 +94,20 @@ static BOOL isPostAdLoadPrefetchDisabled = NO;
         return nil;
     }
 
+    // If timeout == 1, and CSA failed, then return failure. Do not make the bids call
+    if (options != nil && [options timeout] != nil) {
+        NSTimeInterval timeInMillis = [[options timeout] doubleValue] * 1000;
+        if (timeInMillis <= 1) {
+            NSString *errStr =
+                [NSString stringWithFormat:@"CSA failed when timeout(in millis) is set to - %f", timeInMillis];
+            MNLogD(@"CSA: Error - %@", errStr);
+            NSError *csaErr =
+                [MNBaseError createErrorWithCode:MNBaseErrCodeCSAFailForSetTimeout withFailureReason:errStr];
+            failureHandler(csaErr);
+            return nil;
+        }
+    }
+
     // Perform the actual request
 
     // Adding the cached responses into the bid-request

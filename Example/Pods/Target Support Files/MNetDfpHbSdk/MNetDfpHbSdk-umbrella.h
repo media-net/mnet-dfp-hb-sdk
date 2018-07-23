@@ -25,6 +25,7 @@
 #import "MNetDfpBidder.h"
 #import "MNetDfpHb+Internal.h"
 #import "MNetDfpHb.h"
+#import "MNetDfpTaskManager.h"
 
 FOUNDATION_EXPORT double MNetDfpHbSdkVersionNumber;
 FOUNDATION_EXPORT const unsigned char MNetDfpHbSdkVersionString[];

@@ -212,10 +212,18 @@ static MNBaseSdkConfig *instance;
 
 - (NSNumber *)getGptDelay {
     MNBasePublisherTimeoutSettings *publisherTimeoutSettings = self.config.publisherTimeoutSettings;
-    if (publisherTimeoutSettings) {
+    if (publisherTimeoutSettings && [publisherTimeoutSettings gptrd] != nil) {
         return publisherTimeoutSettings.gptrd;
     }
     return [NSNumber numberWithInt:DEFAULT_GPT_DELAY];
+}
+
+- (NSNumber *)getHbExtraDelay {
+    MNBasePublisherTimeoutSettings *publisherTimeoutSettings = self.config.publisherTimeoutSettings;
+    if (publisherTimeoutSettings && [publisherTimeoutSettings hbDelayExtra] != nil) {
+        return publisherTimeoutSettings.hbDelayExtra;
+    }
+    return [NSNumber numberWithInt:DEFAULT_HB_EXTRA_DELAY];
 }
 
 - (NSNumber *)getPrfDelay {

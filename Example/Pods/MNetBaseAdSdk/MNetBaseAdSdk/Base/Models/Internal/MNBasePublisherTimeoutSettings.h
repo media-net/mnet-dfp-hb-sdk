@@ -11,4 +11,5 @@
 @interface MNBasePublisherTimeoutSettings : NSObject <MNJMMapperProtocol>
 @property (atomic) NSNumber *prfd;
 @property (atomic) NSNumber *gptrd;
+@property (atomic) NSNumber *hbDelayExtra;
 @end

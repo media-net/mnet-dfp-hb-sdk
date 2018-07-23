@@ -32,6 +32,7 @@
 - (BOOL)getIsVideoFireEvents;
 - (NSNumber *)getPrfDelay;
 - (NSNumber *)getGptDelay;
+- (NSNumber *)getHbExtraDelay;
 - (NSNumber *)getRefreshRate;
 - (NSNumber *)getPulseMaxArrLen;
 - (NSNumber *)getPulseMaxSize;
