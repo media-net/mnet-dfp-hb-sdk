@@ -24,9 +24,9 @@
     },
     "source": {
         "git": "https://github.com/media-net/mnet-dfp-hb-sdk.git",
-        "tag": "0.3.0"
+        "tag": "0.3.1"
     },
     "static_framework": true,
     "summary": "A short description of MNetDfpHbSdk.",
-    "version": "0.3.0"
+    "version": "0.3.1"
 }

@@ -23,7 +23,7 @@
 
 - (NSURLSessionDataTask *)prefetchBidsForAdRequest:(MNBaseAdRequest *_Nonnull)adRequest
                                             withCb:(void (^_Nullable)(NSError *_Nullable prefetchErr))prefetchCb {
-    if (YES == [[MNBaseSdkConfig getInstance] isAggressiveBiddingEnabled]) {
+    if (NO == [[MNBaseSdkConfig getInstance] isAggressiveBiddingEnabled]) {
         prefetchCb([MNBaseError createErrorWithDescription:@"aggressive bidding is disabled"]);
         return nil;
     }

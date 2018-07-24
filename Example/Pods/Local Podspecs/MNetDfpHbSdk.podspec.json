@@ -1,6 +1,6 @@
 {
   "name": "MNetDfpHbSdk",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "summary": "A short description of MNetDfpHbSdk.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/media-net/ios-dfp-hb-sdk",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/media-net/ios-dfp-hb-sdk.git",
-    "tag": "0.3.0"
+    "tag": "0.3.1"
   },
   "platforms": {
     "ios": "8.0"

@@ -22,7 +22,7 @@ PODS:
     - MNALApplink (= 0.13.7)
     - MNetJSONModeller (= 1.1.6)
   - MNetCMPConsentTool (0.1.0)
-  - MNetDfpHbSdk (0.3.0):
+  - MNetDfpHbSdk (0.3.1):
     - Google-Mobile-Ads-SDK (>= 7.0)
     - MNetBaseAdSdk (= 0.8.0)
   - MNetJSONModeller (1.1.6)
@@ -57,7 +57,7 @@ SPEC CHECKSUMS:
   MNALApplink: 021097529324ecbc3ea1caaebf304f590d861c89
   MNetBaseAdSdk: 5bfd0cdefb55cc88fda1d1abe19a335721d78794
   MNetCMPConsentTool: 157a7f1ddc245d756bf50e0c043bcc6640cc11c9
-  MNetDfpHbSdk: 708b9e251dd359f60be543ac28413730cd5b6b11
+  MNetDfpHbSdk: a471b9c7672e6157f3c2fb94cefa9ac2c8ae547c
   MNetJSONModeller: 470c7e65d54ab5732f724bfe23d286d9a5d5fd9c
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
 
