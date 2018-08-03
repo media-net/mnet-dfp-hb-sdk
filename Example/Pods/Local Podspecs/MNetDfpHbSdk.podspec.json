@@ -1,8 +1,8 @@
 {
   "name": "MNetDfpHbSdk",
-  "version": "0.3.1",
-  "summary": "A short description of MNetDfpHbSdk.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.4.0",
+  "summary": "MNetDfpHbSdk - A DFP header-bidding sdk",
+  "description": "MNetDfpHbSdk - A DFP header-bidding sdk",
   "homepage": "https://github.com/media-net/ios-dfp-hb-sdk",
   "license": {
     "type": "Copyright",
@@ -14,18 +14,27 @@
   },
   "source": {
     "git": "https://github.com/media-net/ios-dfp-hb-sdk.git",
-    "tag": "0.3.1"
+    "tag": "0.4.0"
   },
   "platforms": {
     "ios": "8.0"
   },
   "source_files": "MNetDfpHbSdk/Classes/**/*",
-  "frameworks": "CoreLocation",
+  "frameworks": [
+    "CoreLocation",
+    "AdSupport",
+    "MobileCoreServices",
+    "SystemConfiguration",
+    "AVFoundation",
+    "Security",
+    "CoreTelephony",
+    "WebKit"
+  ],
   "static_framework": true,
   "cocoapods_version": ">= 1.4.0",
   "dependencies": {
     "MNetBaseAdSdk": [
-      "0.8.0"
+      "0.9.1"
     ],
     "Google-Mobile-Ads-SDK": [
       ">= 7.0"

@@ -12,6 +12,7 @@
 #import "MNALBlackList.h"
 #import "MNALConstants.h"
 #import "MNALLog.h"
+#import "MNALSBJson5Writer.h"
 #import "MNALUtils.h"
 #import "NSString+MNALStringCrypto.h"
 
@@ -76,23 +77,83 @@
     return encodedSegmentLink;
 }
 
-+ (NSString *)getContentHash:(UIViewController *)controller viewTreeContent:(NSString *)content {
-    NSString *hashStr;
++ (NSString *)getJsonStringOfPropertiesForViewController:(UIViewController *)controller
+                                                skipList:(NSArray *)skipList
+                                                 content:(NSString *)content
+                                            contentLimit:(NSInteger)contentLimit {
     NSMutableDictionary *propsDict = [self getBasicPropsForObject:controller];
     [propsDict setObject:[MNALUtils getTitleForController:controller] forKey:@"title"];
+
+    // Make sure content is non null and content length should be limited to given contentLimit
     if (content && ![content isEqualToString:@""]) {
-        [propsDict setObject:content forKey:@"text-content"];
+        NSString *textContent;
+        if ([content length] <= contentLimit) {
+            textContent = content;
+        } else {
+            textContent = [content substringWithRange:NSMakeRange(0, contentLimit)];
+        }
+        [propsDict setObject:textContent forKey:@"text-content"];
     }
 
-    NSString *jsonStr = [self convertCollectionToStr:propsDict];
-    hashStr           = [jsonStr MD5];
+    MNALLinkLog(@"Original properties dictionary %@", propsDict);
 
-    MNALLinkLog(@"HASH: %@", controller);
-    MNALLinkLog(@"HASH: Dict: %@", jsonStr);
-    MNALLinkLog(@"HASH: MD5:  %@", hashStr);
-    MNALLinkLog(@"HASH: *************");
+    // Remove keys from propsDict matching to skiplist
+    if (skipList != nil && skipList.count > 0) {
+        propsDict = [self removeObjectFromDict:propsDict skipList:skipList];
+    }
 
-    return hashStr;
+    MNALLinkLog(@"Property dict after removing skipped object %@", propsDict);
+
+    if (propsDict == nil || [propsDict count] == 0) {
+        // After removing skipped entries dictionary may become null
+        return @"";
+    }
+
+    MNALSBJson5Writer *jsonWriter =
+        [MNALSBJson5Writer writerWithMaxDepth:NESTED_LEVEL_LIMIT humanReadable:NO sortKeys:YES];
+    NSString *intentJsonStr = @"";
+    if (jsonWriter) {
+        intentJsonStr = [jsonWriter stringWithObject:propsDict];
+    }
+
+    MNALLinkLog(@"INTENT: %@", controller);
+    MNALLinkLog(@"INTENT: Json string: %@", intentJsonStr);
+    MNALLinkLog(@"INTENT: *************");
+    return intentJsonStr;
+}
+
++ (NSMutableDictionary *)removeObjectFromDict:(NSMutableDictionary *)propsDict skipList:(NSArray *)skipList {
+    if (propsDict == nil || [propsDict count] == 0) {
+        return [NSMutableDictionary dictionary];
+    }
+
+    if (skipList == nil || [skipList count] == 0) {
+        return propsDict;
+    }
+
+    // Handle nested object skipping case
+    for (NSString *skippedKey in skipList) {
+        if ([skippedKey containsString:@"."]) {
+            NSArray *keyPathElements = [skippedKey componentsSeparatedByString:@"."];
+            NSUInteger numElements   = [keyPathElements count];
+            if (numElements == 1) {
+                // Handle case @"someKey."
+                continue;
+            }
+
+            NSString *keyPathHead =
+                [[keyPathElements subarrayWithRange:(NSRange){0, numElements - 1}] componentsJoinedByString:@"."];
+            NSMutableDictionary *tailDict = [propsDict valueForKeyPath:keyPathHead];
+            if (tailDict == nil || [tailDict count] == 0) {
+                continue;
+            }
+
+            [tailDict removeObjectForKey:[keyPathElements lastObject]];
+        } else {
+            [propsDict removeObjectForKey:skippedKey];
+        }
+    }
+    return propsDict;
 }
 
 + (NSString *)convertCollectionToStr:(id)collection {
@@ -145,15 +206,10 @@
         return propsDict;
     }
 
-    // Only going to fetch the string and index paths as of now
-    NSMutableArray<NSString *> *basicPropTypes = [[NSMutableArray alloc] initWithArray:@[
-        //@"NSString",
-        @"NSIndexPath", @"NSURL"
-    ]];
-    if (isPagerController) {
-        NSArray<NSString *> *pagerPropTypes = @[ @"NSUInteger", @"NSInteger" ];
-        [basicPropTypes addObjectsFromArray:pagerPropTypes];
-    }
+    // Previously we were only fetching the string and index paths
+    // But with the introduction of skiplist now we are also fetching NSInteger, NSUInteger
+    NSMutableArray<NSString *> *basicPropTypes =
+        [[NSMutableArray alloc] initWithArray:@[ @"NSIndexPath", @"NSURL", @"NSInteger", @"NSUInteger", @"NSString" ]];
 
     uint count;
     objc_property_t *properties = class_copyPropertyList([obj class], &count);
@@ -167,7 +223,6 @@
             const char *propertyTypeChar = [self getPropertyType:properties[i]];
 
             NSString *propertyName = [self getNSStringFromChar:propertyNameChar];
-            ;
             NSString *propertyType = [self getNSStringFromChar:propertyTypeChar];
 
             if (propertyType == nil) {
@@ -184,7 +239,7 @@
 
                         NSString *rowStr       = [NSString stringWithFormat:@"%ld", (long) [indexPath row]];
                         NSString *sectionStr   = [NSString stringWithFormat:@"%ld", (long) [indexPath section]];
-                        NSDictionary *contents = @{ @"row" : rowStr, @"section" : sectionStr };
+                        NSDictionary *contents = @{@"row" : rowStr, @"section" : sectionStr};
 
                         [propsDict setValue:contents forKey:propertyName];
 
@@ -192,6 +247,11 @@
                         NSURL *url = [obj valueForKey:propertyName];
                         [propsDict setValue:[url absoluteString] forKey:propertyName];
                     } else if ([propertyType isEqualToString:@"NSString"]) {
+                        // Ignnore description and debugDescription
+                        if ([propertyName isEqualToString:@"debugDescription"] ||
+                            [propertyName isEqualToString:@"description"]) {
+                            continue;
+                        }
                         // Ignore the strings that contain only numbers
                         NSString *stringVal = [obj valueForKey:propertyName];
 
@@ -254,7 +314,7 @@
       NSNumber *bLength = [NSNumber numberWithUnsignedInteger:b.length];
       return [bLength compare:aLength];
     }];
-    prefixList = sortedArray;
+    prefixList  = sortedArray;
 
     NSString *conditionalPrefixes   = [prefixList componentsJoinedByString:@"|"];
     NSString *reservedPrefixesRegex = [NSString stringWithFormat:@"^(?:%@)[A-Z][a-z]", conditionalPrefixes];

@@ -162,14 +162,6 @@ static NSArray<NSString *> *testDevicesList;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       titleStringMap = @{
-          ENUM_VAL(AD_MOB_HB) : @"ADMOB BANNER",
-          ENUM_VAL(DFP_HB) : @"DFP BANNER",
-          ENUM_VAL(DFP_INTERSTITIAL_HB) : @"DFP INTERSTITIAL",
-          ENUM_VAL(DFP_REWARDED) : @"DFP MEDIATION REWARDED VIDEO",
-          ENUM_VAL(DFP_MEDIATION) : @"DFP BANNER MEDIATION",
-          ENUM_VAL(ADMOB_MEDIATION) : @"ADMOB BANNER MEDIATION",
-          ENUM_VAL(DFP_INTERSTITIAL_MEDIATION) : @"DFP INTERSTITIAL MEDIATION",
-          ENUM_VAL(ADMOB_INTERSTITIAL_MEDIATION) : @"ADMOB INTERSTITIAL MEDIATION",
           ENUM_VAL(DFP_BANNER_MANUAL_HB) : @"MANUAL DFP BANNER",
           ENUM_VAL(DFP_INSTERSTITIAL_MANUAL_HB) : @"MANUAL DFP INTERSTITIAL",
           ENUM_VAL(MNET_AUTOMATION_DFP_ADVIEW) : @"AUTOMATION DFP AD"
@@ -203,249 +195,6 @@ static NSArray<NSString *> *testDevicesList;
     [self clearAdView];
 
     switch ([self adType]) {
-
-    case DFP_HB: {
-        [self addLoaderToScreen];
-
-        NSLog(@"creating banner ad view for dfp");
-        CGSize adSize = GAD_SIZE_320x50;
-        dfpBannerView = [[DFPBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(adSize)];
-        [[self adView] addSubview:dfpBannerView];
-        [dfpBannerView setAdUnitID:DEMO_DFP_AD_UNIT_ID];
-        [dfpBannerView setRootViewController:self];
-        [dfpBannerView setValidAdSizes:@[
-            NSValueFromGADAdSize(kGADAdSizeBanner),
-            NSValueFromGADAdSize(kGADAdSizeMediumRectangle),
-        ]];
-        [dfpBannerView setAdSizeDelegate:self];
-        [dfpBannerView setDelegate:self];
-        [self applyAdViewContraints:dfpBannerView height:adSize.height width:adSize.width];
-
-        DFPRequest *request = [DFPRequest request];
-        [request setCustomTargeting:@{@"pos" : @"b"}];
-        [request setTestDevices:testDevicesList];
-        [request setKeywords:@[ @"sports", @"scores", @"content_link:https://my-custom-link.com.imnapp/keywords" ]];
-        [request setGender:kGADGenderMale];
-        [request setBirthday:[NSDate dateWithTimeIntervalSince1970:0]];
-        [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-        [request setContentURL:@"https://my-custom-link.com.imnapp/contentURL"];
-        /*
-         [request setContentURL:@"https://my-custom-link.com/contentURL"];
-
-         // These are additional keywords that can be picked up HB
-         [request setKeywords:@[@"sports", @"scores", @"content_link:https://my-custom-link.com/keywords"]];
-         [request setGender:kGADGenderMale];
-         [request setBirthday:[NSDate dateWithTimeIntervalSince1970:0]];
-         [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-
-         GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-         NSString *label = DFP_CUSTOM_EVENT_LABEL;
-         [customEventExtras setExtras:@{
-         @"author":       @"hawking",
-         @"shape":        @"saddle",
-         @"element":      @"universe",
-         @"content_link": @"https://my-custom-link.com/additional_params",
-         }
-         forLabel:label];
-         NSLog(@"%@", [customEventExtras extrasForLabel:label]);
-         [request registerAdNetworkExtras:customEventExtras];
-         */
-
-        [dfpBannerView loadRequest:request];
-        break;
-    }
-
-    case AD_MOB_HB: {
-        [self addLoaderToScreen];
-
-        NSLog(@"creating banner ad view for admob");
-        [[self adView] addSubview:gadBannerView];
-        [self applyAdViewContraints:gadBannerView height:GAD_SIZE_320x50.height width:GAD_SIZE_320x50.width];
-        [gadBannerView setAdUnitID:DEMO_AD_MOB_AD_UNIT_ID];
-        [gadBannerView setRootViewController:self];
-        GADRequest *request = [GADRequest request];
-        [request setTestDevices:testDevicesList];
-        [gadBannerView loadRequest:request];
-
-        break;
-    }
-
-    case DFP_INTERSTITIAL_HB: {
-        [self addLoaderToScreen];
-        dfpInterstitialAd   = [[DFPInterstitial alloc] initWithAdUnitID:DEMO_DFP_HB_INTERSTITIAL_AD_UNIT_ID];
-        DFPRequest *request = [DFPRequest request];
-        [request setCustomTargeting:@{@"pos" : @"i1"}];
-        [request setTestDevices:testDevicesList];
-        /*
-         [request setContentURL:@"https://my-custom-link.com/contentURL"];
-
-         // These are additional keywords that can be picked up HB
-         [request setKeywords:@[@"sports", @"scores", @"content_link:https://my-custom-link.com/keywords"]];
-         [request setGender:kGADGenderMale];
-         [request setBirthday:[NSDate dateWithTimeIntervalSince1970:0]];
-         [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-
-         GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-         NSString *label = DFP_CUSTOM_EVENT_LABEL;
-         [customEventExtras setExtras:@{
-         @"author":       @"hawking",
-         @"shape":        @"saddle",
-         @"element":      @"universe",
-         @"content_link": @"https://my-custom-link.com/additional_params",
-         }
-         forLabel:label];
-         NSLog(@"%@", [customEventExtras extrasForLabel:label]);
-         [request registerAdNetworkExtras:customEventExtras];
-         */
-
-        [dfpInterstitialAd setDelegate:self];
-        [dfpInterstitialAd loadRequest:request];
-        break;
-    }
-
-    case DFP_MEDIATION: {
-        [self addLoaderToScreen];
-
-        NSLog(@"creating banner ad view for dfp");
-        dfpBannerView = [[DFPBannerView alloc]
-            initWithAdSize:GADAdSizeFromCGSize(CGSizeMake(GAD_SIZE_320x50.width, GAD_SIZE_320x50.height))];
-        [[self adView] addSubview:dfpBannerView];
-        [dfpBannerView setAdUnitID:DEMO_DFP_MEDIATION_AD_UNIT_ID];
-        [dfpBannerView setRootViewController:self];
-        [dfpBannerView setDelegate:self];
-
-        DFPRequest *request = [DFPRequest request];
-        [request setCustomTargeting:@{@"bid" : @"15"}];
-        [request setTestDevices:testDevicesList];
-
-        // User-defined stuff
-        [request setGender:kGADGenderFemale];
-        [request setBirthday:[NSDate dateWithTimeIntervalSince1970:0]];
-        [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-
-        /*
-         [request setKeywords:@[@"sports", @"scores", @"content_link:https://my-custom-link.com/keywords"]];
-         GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-         NSString *label = DFP_CUSTOM_EVENT_LABEL;
-         [customEventExtras setExtras:@{
-         @"author":       @"hawking",
-         @"shape":        @"saddle",
-         @"element":      @"universe",
-         @"content_link": @"https://my-custom-link.com/additional_params",
-         }
-         forLabel:DFP_CUSTOM_EVENT_LABEL];
-         NSLog(@"%@", [customEventExtras extrasForLabel:DFP_CUSTOM_EVENT_LABEL]);
-         [request registerAdNetworkExtras:customEventExtras];
-         */
-
-        [dfpBannerView loadRequest:request];
-
-        [dfpBannerView setFrame:CGRectMake((_adView.frame.size.width - GAD_SIZE_320x50.width) / 2.0, 0,
-                                           GAD_SIZE_320x50.width, GAD_SIZE_320x50.height)];
-        break;
-    }
-    case ADMOB_MEDIATION: {
-        [self addLoaderToScreen];
-
-        NSLog(@"creating banner ad view for admob");
-        gadBannerView = [[GADBannerView alloc]
-            initWithAdSize:GADAdSizeFromCGSize(CGSizeMake(GAD_SIZE_320x50.width, GAD_SIZE_320x50.height))];
-        [[self adView] addSubview:gadBannerView];
-        [gadBannerView setAdUnitID:DEMO_AD_MOB_MEDIATION_AD_UNIT_ID];
-        [gadBannerView setRootViewController:self];
-        [gadBannerView setDelegate:self];
-
-        GADRequest *request = [GADRequest request];
-        [request setTestDevices:testDevicesList];
-
-        // custom user settings
-        [request setGender:kGADGenderFemale];
-        [request setBirthday:[NSDate dateWithTimeIntervalSince1970:0]];
-        [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-
-        /*
-         [request setKeywords:@[@"sports", @"scores", @"content_link:https://my-custom-link.com/keywords"]];
-         GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-         NSString *label = AD_MOB_CUSTOM_EVENT_LABEL;
-         [customEventExtras setExtras:@{
-         @"author":       @"hawking",
-         @"shape":        @"saddle",
-         @"element":      @"universe",
-         @"content_link": @"https://my-custom-link.com/additional_params",
-         }
-         forLabel:label];
-         NSLog(@"%@", [customEventExtras extrasForLabel:label]);
-         [request registerAdNetworkExtras:customEventExtras];
-         */
-
-        [gadBannerView loadRequest:request];
-
-        [gadBannerView setFrame:CGRectMake((_adView.frame.size.width - GAD_SIZE_320x50.width) / 2.0, 0,
-                                           GAD_SIZE_320x50.width, GAD_SIZE_320x50.height)];
-        break;
-    }
-    case DFP_INTERSTITIAL_MEDIATION: {
-        [self addLoaderToScreen];
-        dfpInterstitialAd   = [[DFPInterstitial alloc] initWithAdUnitID:DEMO_DFP_MEDIATION_INTERSTITIAL_AD_UNIT_ID];
-        DFPRequest *request = [DFPRequest request];
-        [request setTestDevices:testDevicesList];
-
-        // User-defined stuff
-        [request setGender:kGADGenderFemale];
-        [request setBirthday:[NSDate dateWithTimeIntervalSince1970:3]];
-        [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-        /*
-         [request setKeywords:@[@"sports", @"scores",
-         @"content_link:https://dfp-intersitial-my-custom-link.com/keywords"]]; NSString *label =
-         DFP_CUSTOM_EVENT_LABEL; GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-         [customEventExtras setExtras:@{
-         @"author":       @"hawking",
-         @"shape":        @"saddle",
-         @"element":      @"universe",
-         @"content_link": @"https://dfp-intersitial-my-custom-link.com/additional_params",
-         }
-         forLabel:label];
-         NSLog(@"%@", [customEventExtras extrasForLabel:label]);
-         [request registerAdNetworkExtras:customEventExtras];
-         */
-
-        [dfpInterstitialAd setDelegate:self];
-        [dfpInterstitialAd loadRequest:request];
-        break;
-    }
-    case ADMOB_INTERSTITIAL_MEDIATION: {
-        [self addLoaderToScreen];
-        gadInterstitialAd = [[GADInterstitial alloc] initWithAdUnitID:DEMO_AD_MOB_MEDIATION_INTERSTITIAL_AD_UNIT_ID];
-        [gadInterstitialAd setDelegate:self];
-
-        GADRequest *request = [GADRequest request];
-        [request setTestDevices:testDevicesList];
-
-        // User-defined stuff
-        [request setGender:kGADGenderFemale];
-        [request setBirthday:[NSDate dateWithTimeIntervalSince1970:4]];
-        [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
-        /*
-         [request setKeywords:@[@"sports", @"scores",
-         @"content_link:https://admob-intersitial-my-custom-link.com/keywords"]];
-
-         NSString *label = AD_MOB_CUSTOM_EVENT_LABEL;
-         GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-         [customEventExtras setExtras:@{
-         @"author":       @"hawking",
-         @"shape":        @"saddle",
-         @"element":      @"universe",
-         @"content_link": @"https://admob-intersitial-my-custom-link.com/additional_params",
-         }
-         forLabel:label];
-         NSLog(@"%@", [customEventExtras extrasForLabel:label]);
-         [request registerAdNetworkExtras:customEventExtras];
-         */
-
-        [gadInterstitialAd loadRequest:request];
-        break;
-    }
-
     case DFP_BANNER_MANUAL_HB: {
         [self addLoaderToScreen];
 
@@ -460,8 +209,11 @@ static NSArray<NSString *> *testDevicesList;
         DFPRequest *request = [DFPRequest request];
         [request setCustomTargeting:@{@"pos" : @"b"}];
         [request setTestDevices:testDevicesList];
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         [request setGender:kGADGenderFemale];
         [request setBirthday:[NSDate dateWithTimeIntervalSince1970:4]];
+#pragma GCC diagnostic pop
         [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
 
         [request setKeywords:@[
@@ -502,8 +254,11 @@ static NSArray<NSString *> *testDevicesList;
         [request setTestDevices:testDevicesList];
 
         [request setTestDevices:testDevicesList];
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         [request setGender:kGADGenderFemale];
         [request setBirthday:[NSDate dateWithTimeIntervalSince1970:4]];
+#pragma GCC diagnostic pop
         [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
 
         [request setKeywords:@[
@@ -655,19 +410,6 @@ static NSArray<NSString *> *testDevicesList;
 
 - (IBAction)showAdAction:(id)sender {
     switch ([self adType]) {
-    case DFP_INTERSTITIAL_HB: {
-        [dfpInterstitialAd presentFromRootViewController:self];
-        break;
-    }
-    case DFP_INTERSTITIAL_MEDIATION: {
-        [dfpInterstitialAd presentFromRootViewController:self];
-        break;
-    }
-
-    case ADMOB_INTERSTITIAL_MEDIATION: {
-        [gadInterstitialAd presentFromRootViewController:self];
-        break;
-    }
     case DFP_INSTERSTITIAL_MANUAL_HB: {
         [dfpInterstitialAd presentFromRootViewController:self];
         break;

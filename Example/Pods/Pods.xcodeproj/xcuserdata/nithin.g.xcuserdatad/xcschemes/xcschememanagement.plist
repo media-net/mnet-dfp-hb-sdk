@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MNetCMPConsentTool.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MNetDfpHbSdk.xcscheme</key>
 		<dict>
 			<key>isShown</key>

@@ -14,7 +14,11 @@
 - (instancetype)init __attribute__((unavailable("Use [MNALAppLink getInstanceWithVC:] instead")));
 
 /// Create instance from VC. This creates the view-tree and the link immediately
-+ (instancetype)getInstanceWithVC:(UIViewController *)viewController withContentEnabled:(BOOL)isContentEnabled;
++ (instancetype)getInstanceWithVC:(UIViewController *)viewController
+               withContentEnabled:(BOOL)isContentEnabled
+               withIntentSkipList:(NSArray *)skipList
+                     contentLimit:(NSInteger)contentLimit
+                     titleEnabled:(BOOL)titleEnabled;
 
 /// Returns the link for the view controller
 - (NSString *)getLink;

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CE5B9F49996FEA9464CFBF03A364B56"
+               BlueprintIdentifier = "E7B18698E495CA54EFC52A94922248E0"
                BlueprintName = "MNALApplink"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "MNALApplink.framework">

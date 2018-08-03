@@ -23,12 +23,14 @@
 + (NSString *)getTitleForController:(UIViewController *)controller;
 + (NSString *)getRandomString;
 + (NSString *)getAppVersionStr;
-+ (NSString *)getContentHash:(UIViewController *)controller viewTreeContent:(NSString *)content;
 + (NSString *)getNSStringFromChar:(const char *)charVal;
-
++ (NSString *)getJsonStringOfPropertiesForViewController:(UIViewController *)controller
+                                                skipList:(NSArray *)skipList
+                                                 content:(NSString *)content
+                                            contentLimit:(NSInteger)contentLimit;
 /// Gets the normalized dim wrt window in percentages
 + (NSNumber *)getNormalizedDimension:(CGFloat)dim isWidth:(BOOL)isWidth;
-
++ (NSMutableDictionary *)removeObjectFromDict:(NSMutableDictionary *)propsDict skipList:(NSArray *)skipList;
 /// Generates unique link for controller name
 + (NSString *)getURIForControllerName:(NSString *)controllerName;
 

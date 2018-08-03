@@ -40,4 +40,7 @@
 
 @property (atomic) MNJMBoolean *isPulseEnabled;
 @property (atomic) NSArray<NSString *> *pulseWhiteList;
+@property (atomic) NSDictionary<NSString *, NSArray<NSString *> *> *intentSkipList;
+@property (atomic) MNJMBoolean *isCrawledTitleEnabled;
+@property (atomic) NSNumber *intentContentLimit;
 @end

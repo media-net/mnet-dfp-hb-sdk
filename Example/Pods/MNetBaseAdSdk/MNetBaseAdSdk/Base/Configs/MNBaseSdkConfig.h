@@ -79,5 +79,7 @@
 - (BOOL)isSwizzlingEnabled;
 - (BOOL)isPulseEnabled;
 - (NSArray<NSString *> *_Nullable)fetchPulseEventWhiteList;
-
+- (NSArray<NSString *> *_Nullable)fetchIntentSkipListForViewController:(NSString *)viewController;
+- (NSInteger)getIntentContentLimit;
+- (BOOL)isCrawledLinkTitleEnabled;
 @end

@@ -700,11 +700,18 @@ NSString *const kMNBaseAdCodeCookieStoreKey = @"mnet_adcode_cookies";
 }
 
 + (NSString *)getLinkFromApplink:(UIViewController *)vc {
-    return [MNBaseUtil getDefaultBundleUrl];
-    // NOTE: This is temporarily commented out
-    /*
-    MNALAppLink *appLink = [MNALAppLink getInstanceWithVC:rootViewController withContentEnabled:NO];
-     */
+
+    NSArray<NSString *> *skipList =
+        [[MNBaseSdkConfig getInstance] fetchIntentSkipListForViewController:NSStringFromClass([vc class])];
+    NSInteger contentLimit = [[MNBaseSdkConfig getInstance] getIntentContentLimit];
+    BOOL isTitleEnabled    = [[MNBaseSdkConfig getInstance] isCrawledLinkTitleEnabled];
+
+    MNALAppLink *applink = [MNALAppLink getInstanceWithVC:vc
+                                       withContentEnabled:YES
+                                       withIntentSkipList:skipList
+                                             contentLimit:contentLimit
+                                             titleEnabled:isTitleEnabled];
+    return [applink getLink];
 }
 
 + (BOOL)doesStrMatch:(NSString *)ipStr regexStr:(NSString *)regexStr {

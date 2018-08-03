@@ -5,7 +5,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'MNetDfpHbSdk_Example' do
   pod 'MNetDfpHbSdk', :path => '../'
-  pod 'MNetCMPConsentTool'
   pod 'MBProgressHUD'
   pod 'Toast', '~> 3.1.0'
 

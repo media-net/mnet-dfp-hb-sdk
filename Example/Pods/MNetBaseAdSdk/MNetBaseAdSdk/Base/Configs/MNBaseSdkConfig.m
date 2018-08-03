@@ -763,4 +763,26 @@ static NSArray<NSString *> *europeanUnionCountryCodes;
     return nil;
 }
 
+- (NSArray<NSString *> *_Nullable)fetchIntentSkipListForViewController:(NSString *)viewController {
+    if (self.hbConfigData != nil && self.hbConfigData.intentSkipList != nil &&
+        [self.hbConfigData.intentSkipList count] > 0 && viewController != nil) {
+        return [self.hbConfigData.intentSkipList valueForKey:viewController];
+    }
+    return nil;
+}
+
+- (NSInteger)getIntentContentLimit {
+    if (self.hbConfigData != nil && self.hbConfigData.intentContentLimit != nil) {
+        return [self.hbConfigData.intentContentLimit integerValue];
+    }
+    return DEFAULT_INTENT_CONTENT_LIMIT;
+}
+
+- (BOOL)isCrawledLinkTitleEnabled {
+    if (self.hbConfigData != nil && self.hbConfigData.isCrawledTitleEnabled != nil) {
+        return [self.hbConfigData.isCrawledTitleEnabled isYes];
+    }
+    return DEFAULT_CRAWLED_LINK_TITLE_ENABLED;
+}
+
 @end

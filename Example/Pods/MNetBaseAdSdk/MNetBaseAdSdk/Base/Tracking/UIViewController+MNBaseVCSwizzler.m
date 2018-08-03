@@ -14,7 +14,7 @@
 #import "UIViewController+MNBaseVCSwizzler.h"
 #import <MNALAppLink/MNALAppLink.h>
 
-static NSString *mnetSwizzlerPrefix = @"mnad_swizzled_";
+static NSString *mnetSwizzlerPrefix = @"mn_base_ad_swizzled_";
 
 @implementation UIViewController (MNBaseVCSwizzler)
 
@@ -24,9 +24,9 @@ static NSString *mnetSwizzlerPrefix = @"mnad_swizzled_";
  runtime cleverness that is not required for now.
  Just using plain global vars.
  */
-BOOL isAlreadySwizzled;
-NSArray *selectorsToSwizzle;
-MNBaseNotificationManager *sdkConfigNotificationObj;
+static BOOL isAlreadySwizzled;
+static NSArray *selectorsToSwizzle;
+static MNBaseNotificationManager *sdkConfigNotificationObj;
 
 + (void)load {
     [[UIViewController getSharedInstance] initializeConfigListeners];
@@ -112,7 +112,8 @@ static UIViewController *instance;
 }
 
 /// Processes the VC before it's displayed
-- (void)mnad_processVC {
+- (void)mn_base_ad_swizzled_processVC {
+    MNLogD(@"SWIZZLE_LINK_GEN: In mn_base_ad_swizzled_processVC");
     // NOTE: This should be an array of strings.
     // There might be some classes that might not exist in certain ios versions.
     // It'll be handled when NSClassFromString() is used.
@@ -129,14 +130,17 @@ static UIViewController *instance;
     for (NSString *skipControllerStr in skippableControllers) {
         Class skippableClass = NSClassFromString(skipControllerStr);
         if (skippableClass != nil && [self isKindOfClass:skippableClass]) {
+            MNLogD(@"SWIZZLE_LINK_GEN: Skipping link generation for class - %@", NSStringFromClass(skippableClass));
             return;
         }
     }
 
     __block MNBaseAdRequest *adRequest = [MNBaseAdRequest newRequest];
     void (^task)(void)                 = ^{
+      MNLogD(@"SWIZZLE_LINK_GEN: Generating link for page");
       @try {
           NSString *contextLink = [MNBaseUtil getLinkFromApplink:self];
+          MNLogD(@"SWIZZLE_LINK_GEN: got link - %@", contextLink);
 
           // Make a prefetch-predict-bids call here
           adRequest.contextLink         = contextLink;
@@ -163,7 +167,7 @@ static UIViewController *instance;
                                                          if (prefetchErr) {
                                                              MNLogRemote(@"Error: %@", prefetchErr);
                                                          } else {
-                                                             MNLogD(@"Performed prefetch!");
+                                                             MNLogD(@"Performed prefetch from swizzler!");
                                                          }
                                                        }];
                      } @catch (NSException *e) {
@@ -174,35 +178,35 @@ static UIViewController *instance;
 
 #pragma mark - All the swizzled methods
 
-- (void)mnad_swizzled_viewDidAppear:(BOOL)animated {
+- (void)mn_base_ad_swizzled_viewDidAppear:(BOOL)animated {
     MNLogD(@"Swizzled : view did appear %@", self);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       MNLogD(@"Swizzled : view did appear processing start");
       @try {
-          [self mnad_processVC];
+          [self mn_base_ad_swizzled_processVC];
           MNLogD(@"Swizzled : view did appear try block ended");
       } @catch (NSException *e) {
           MNLogE(@"Exception in viewDidAppear - %@", e);
       }
       MNLogD(@"Swizzled : view did appear processing end");
     });
-    [self mnad_swizzled_viewDidAppear:animated];
+    [self mn_base_ad_swizzled_viewDidAppear:animated];
     MNLogD(@"Swizzled : view did appear done");
 }
 
-- (void)mnad_swizzled_viewDidLoad {
+- (void)mn_base_ad_swizzled_viewDidLoad {
     MNLogD(@"Swizzled : view did load");
-    [self mnad_swizzled_viewDidLoad];
+    [self mn_base_ad_swizzled_viewDidLoad];
 }
 
-- (void)mnad_swizzled_viewWillAppear:(BOOL)animated {
+- (void)mn_base_ad_swizzled_viewWillAppear:(BOOL)animated {
     MNLogD(@"Swizzled : view will appear");
-    [self mnad_swizzled_viewWillAppear:animated];
+    [self mn_base_ad_swizzled_viewWillAppear:animated];
 }
 
-- (void)mnad_swizzled_viewWillDisappear:(BOOL)animated {
+- (void)mn_base_ad_swizzled_viewWillDisappear:(BOOL)animated {
     MNLogD(@"Swizzled : view will disappear");
-    [self mnad_swizzled_viewWillDisappear:animated];
+    [self mn_base_ad_swizzled_viewWillDisappear:animated];
 }
 
 @end

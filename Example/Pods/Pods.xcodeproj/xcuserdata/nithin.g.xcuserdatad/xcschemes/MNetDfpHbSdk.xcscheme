@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6E66EF2FDA0345F9C5DF0A66443A16B"
+               BlueprintIdentifier = "962EBBAB24C176EBE20C977A81DF2563"
                BlueprintName = "MNetDfpHbSdk"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "MNetDfpHbSdk.framework">

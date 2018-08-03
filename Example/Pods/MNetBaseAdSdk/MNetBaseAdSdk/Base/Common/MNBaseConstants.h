@@ -188,4 +188,7 @@
 // Default pulse
 #define DEFAULT_PULSE_ENABLED NO
 
+// Default applink constants
+#define DEFAULT_INTENT_CONTENT_LIMIT 50
+#define DEFAULT_CRAWLED_LINK_TITLE_ENABLED NO
 @end

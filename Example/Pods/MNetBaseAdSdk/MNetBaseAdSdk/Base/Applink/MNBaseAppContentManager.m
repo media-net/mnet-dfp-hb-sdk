@@ -10,10 +10,11 @@
 #import "MNBase.h"
 #import "MNBaseAppContentCache.h"
 #import "MNBaseAppContentEvent.h"
+#import "MNBaseDataPrivacy.h"
 #import "MNBaseLogger.h"
 #import "MNBasePulseTracker.h"
+#import "MNBaseSdkConfig.h"
 #import "MNBaseUtil.h"
-
 #import <MNALAppLink/MNALAppLink.h>
 
 @interface MNBaseAppContentManager ()
@@ -32,15 +33,11 @@
 }
 
 - (BOOL)sendContentForLink:(NSString *)originalCrawlingLink andViewController:(UIViewController *)viewController {
-    if ([[MNBase getInstance] appContainsChildDirectedContent]) {
-        MNLogD(@"Not sending real-time-crawling data since app contains child directed content!");
+    if ([[MNBaseDataPrivacy getSharedInstance] doNoTrack]) {
+        MNLogD(@"Not sending real-time-crawling data since doNotTrack is enabled!");
         return NO;
     }
-    return NO;
-    /*
-     NOTE: Temporarily disabling this entire flow, due to issues with daily-mail
-     */
-    /*
+
     BOOL isContentSentAlready = [[MNBaseAppContentCache getSharedInstance] hasKey:originalCrawlingLink];
     if (isContentSentAlready) {
         MNLogD(@"APP_CONTENT: Content is already sent via pulse. Not resending it!");
@@ -55,7 +52,17 @@
 
     NSNumber *startTime = [MNBaseUtil getTimestampInMillis];
 
-    MNALAppLink *appLink = [MNALAppLink getInstanceWithVC:viewController withContentEnabled:YES];
+    NSArray<NSString *> *skipList =
+        [[MNBaseSdkConfig getInstance] fetchIntentSkipListForViewController:NSStringFromClass([viewController class])];
+    NSInteger contentLimit = [[MNBaseSdkConfig getInstance] getIntentContentLimit];
+
+    BOOL isTitleEnabled = [[MNBaseSdkConfig getInstance] isCrawledLinkTitleEnabled];
+
+    MNALAppLink *appLink = [MNALAppLink getInstanceWithVC:viewController
+                                       withContentEnabled:YES
+                                       withIntentSkipList:skipList
+                                             contentLimit:contentLimit
+                                             titleEnabled:isTitleEnabled];
 
     NSNumber *endTime = [MNBaseUtil getTimestampInMillis];
 
@@ -75,11 +82,11 @@
 
         if (content && ![content isEqualToString:@""]) {
             MNBaseAppContentEvent *contentEvent = [[MNBaseAppContentEvent alloc] init];
-            contentEvent.content              = content;
-            contentEvent.crawlerLink          = originalCrawlingLink;
-            contentEvent.adCycleId            = self.adCycleId;
-            contentEvent.adUnitId             = self.adUnitId;
-            contentEvent.contentFetchDuration = [NSNumber numberWithDouble:contentFetchDuration];
+            contentEvent.content                = content;
+            contentEvent.crawlerLink            = originalCrawlingLink;
+            contentEvent.adCycleId              = self.adCycleId;
+            contentEvent.adUnitId               = self.adUnitId;
+            contentEvent.contentFetchDuration   = [NSNumber numberWithDouble:contentFetchDuration];
 
             MNLogD(@"APP_CONTENT: CONTENT - %@", [MNJMManager toJSONStr:contentEvent]);
 
@@ -97,6 +104,5 @@
     }
 
     return doCrawlingLinksMatch;
-     */
 }
 @end

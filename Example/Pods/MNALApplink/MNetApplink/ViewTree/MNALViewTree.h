@@ -37,9 +37,12 @@
 @property (nonatomic) NSMutableArray *secondaryLinks;
 @property (nonatomic) BOOL isFirstScreen;
 
-- (instancetype)initWithViewController:(UIViewController *)controller withContentEnabled:(BOOL)shouldFetchContent;
+- (instancetype)initWithViewController:(UIViewController *)controller
+                    withContentEnabled:(BOOL)shouldFetchContent
+                    withIntentSkipList:(NSArray *)skipList
+                          contentLimit:(NSInteger)contentLimit
+                          titleEnabled:(BOOL)titleEnabled;
 - (NSMutableArray *)getSegments;
 - (UIViewController *)getViewController;
 - (NSString *)getViewTreeLink;
-
 @end

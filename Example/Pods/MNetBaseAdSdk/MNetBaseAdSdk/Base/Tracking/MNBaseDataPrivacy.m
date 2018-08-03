@@ -53,10 +53,14 @@ static MNBaseDataPrivacy *sInstance = nil;
     MNLogD(@"GDPR: MANUAL: MNet consent string %@", consentString);
     MNLogD(@"GDPR: MANUAL: MNet consent status %ld", (long) status);
     MNLogD(@"GDPR: MANUAL: MNet subject to gdpr %ld", (long) gdpr);
-
-    self.consentStatus = status;
     self.subjectToGdpr = gdpr;
 
+    if (self.subjectToGdpr != MNBaseSubjectToGdprEnabled) {
+        // Silently return if subjectToGdpr is not enabled
+        return;
+    }
+
+    self.consentStatus = status;
     if (consentString == nil) {
         MNLogPublic(@"Warning: Nil gdpr consent string");
         self.consentStr = @"";

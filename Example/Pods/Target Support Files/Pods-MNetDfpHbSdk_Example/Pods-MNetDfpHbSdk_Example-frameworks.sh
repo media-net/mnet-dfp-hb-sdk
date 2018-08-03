@@ -147,7 +147,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MNALApplink/MNALApplink.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MNetBaseAdSdk/MNetBaseAdSdk.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MNetCMPConsentTool/MNetCMPConsentTool.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MNetJSONModeller/MNetJSONModeller.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Toast/Toast.framework"
 fi
@@ -156,7 +155,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MNALApplink/MNALApplink.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MNetBaseAdSdk/MNetBaseAdSdk.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MNetCMPConsentTool/MNetCMPConsentTool.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MNetJSONModeller/MNetJSONModeller.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Toast/Toast.framework"
 fi

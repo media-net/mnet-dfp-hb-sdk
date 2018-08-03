@@ -41,6 +41,8 @@
         _euDoNotTrack            = [MNJMBoolean createWithBool:DEFAULT_DO_NOT_TRACK_EU];
         _isSwizzlingVcEnabled    = [MNJMBoolean createWithBool:DEFAULT_IS_SWIZZLING_VC_ENABLED];
         _isPulseEnabled          = [MNJMBoolean createWithBool:DEFAULT_PULSE_ENABLED];
+        _isCrawledTitleEnabled   = [MNJMBoolean createWithBool:DEFAULT_CRAWLED_LINK_TITLE_ENABLED];
+        _intentContentLimit      = [NSNumber numberWithInteger:DEFAULT_INTENT_CONTENT_LIMIT];
     }
     return self;
 }
@@ -63,6 +65,7 @@
         @"euDoNotTrack" : @"eudnt",
         @"isPulseEnabled" : @"enable_pulse",
         @"pulseWhiteList" : @"wh_p_ev",
+        @"isCrawledTitleEnabled" : @"crawled_link_title_enabled",
     };
 }
 
@@ -72,6 +75,10 @@
         @"defaultBids" : [MNJMCollectionsInfo instanceOfArrayWithClassType:[MNBaseDefaultBid class]],
         @"pulseWhiteList" : [MNJMCollectionsInfo instanceOfArrayWithClassType:[NSString class]],
     };
+}
+
+- (NSArray<NSString *> *)directMapForKeys {
+    return @[ @"intentSkipList" ];
 }
 
 @end

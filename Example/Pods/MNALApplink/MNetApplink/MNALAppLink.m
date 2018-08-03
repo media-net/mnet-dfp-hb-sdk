@@ -13,16 +13,33 @@ static BOOL forcedViewContentFetch = NO;
 
 @implementation MNALAppLink
 
-+ (instancetype)getInstanceWithVC:(UIViewController *)viewController withContentEnabled:(BOOL)isContentEnabled {
-    return [[MNALAppLink alloc] initWithVC:viewController withContentEnabled:isContentEnabled];
++ (instancetype)getInstanceWithVC:(UIViewController *)viewController
+               withContentEnabled:(BOOL)isContentEnabled
+               withIntentSkipList:(NSArray *)skipList
+                     contentLimit:(NSInteger)contentLimit
+                     titleEnabled:(BOOL)titleEnabled {
+
+    return [[MNALAppLink alloc] initWithVC:viewController
+                        withContentEnabled:isContentEnabled
+                        withIntentSkipList:skipList
+                              contentLimit:contentLimit
+                              titleEnabled:titleEnabled];
 }
 
-- (instancetype)initWithVC:(UIViewController *)viewController withContentEnabled:(BOOL)isContentEnabled {
+- (instancetype)initWithVC:(UIViewController *)viewController
+        withContentEnabled:(BOOL)isContentEnabled
+        withIntentSkipList:(NSArray *)skipList
+              contentLimit:(NSInteger)contentLimit
+              titleEnabled:(BOOL)titleEnabled {
     self = [super init];
     _vc  = viewController;
 
     void (^updateViewTree)(void) = ^{
-      self.viewTree = [[MNALViewTree alloc] initWithViewController:viewController withContentEnabled:isContentEnabled];
+      self.viewTree           = [[MNALViewTree alloc] initWithViewController:viewController
+                                                withContentEnabled:isContentEnabled
+                                                withIntentSkipList:skipList
+                                                      contentLimit:contentLimit
+                                                      titleEnabled:titleEnabled];
       self.shouldFetchContent = isContentEnabled;
 
       if (self.viewTree != nil) {

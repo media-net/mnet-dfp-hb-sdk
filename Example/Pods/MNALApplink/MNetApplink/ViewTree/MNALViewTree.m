@@ -26,6 +26,9 @@
 @property (nonatomic) UIViewController *shadowViewController;
 @property (nonatomic) NSString *plainText;
 @property (nonatomic) BOOL shouldFetchContent;
+@property (nonatomic) NSArray *intentSkipList;
+@property (nonatomic) NSInteger contentLimit;
+@property (nonatomic) BOOL isTitleEnabled;
 @end
 
 @implementation MNALViewTree
@@ -33,7 +36,11 @@
 static const CGFloat kAreaMajorityPercentage = 0.7;
 static const char *kAssociatedObjectKey;
 
-- (instancetype)initWithViewController:(UIViewController *)controller withContentEnabled:(BOOL)shouldFetchContent {
+- (instancetype)initWithViewController:(UIViewController *)controller
+                    withContentEnabled:(BOOL)shouldFetchContent
+                    withIntentSkipList:(NSArray *)skipList
+                          contentLimit:(NSInteger)contentLimit
+                          titleEnabled:(BOOL)titleEnabled {
 
     self                 = [super init];
     kAssociatedObjectKey = [UNIQUE_VALUE_KEY_NAME UTF8String];
@@ -64,6 +71,12 @@ static const char *kAssociatedObjectKey;
         _webContents = [[NSMutableArray alloc] init];
 
         _secondaryLinks = [[NSMutableArray alloc] init];
+
+        _intentSkipList = skipList;
+
+        _contentLimit = contentLimit;
+
+        _isTitleEnabled = titleEnabled;
 
         NSMutableArray *children = [[NSMutableArray alloc] init];
         UIView *rootView         = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
@@ -98,7 +111,7 @@ static const char *kAssociatedObjectKey;
 
 - (void)addTabBarToTree {
     if (self.shadowViewController.tabBarController) {
-        MNALViewClone *viewClone = [MNALViewClone create:self.shadowViewController.tabBarController.tabBar
+        MNALViewClone *viewClone    = [MNALViewClone create:self.shadowViewController.tabBarController.tabBar
                                           viewController:self.shadowViewController.tabBarController];
         _idCounter                  = _idCounter + 1;
         [viewClone viewInfo].viewId = _idCounter;
@@ -430,7 +443,7 @@ static const char *kAssociatedObjectKey;
             @"data-left" : [x1 stringValue],
             @"data-right" : [x2 stringValue],
         } mutableCopy];
-        NSArray<NSString *> *posKeysList = [attrsDict allKeys];
+        NSArray<NSString *> *posKeysList                       = [attrsDict allKeys];
 
         if (webViewContents == nil) {
             webViewContents = @"";
@@ -529,6 +542,8 @@ static const char *kAssociatedObjectKey;
         htmlConvertedText = [NSString stringWithFormat:@"<p visibility=\'%@\' font-size=\'%d\'>", visibility, fontSize];
         if (textView.text != nil && ![textView.text isEqualToString:@""]) {
             htmlConvertedText = [htmlConvertedText stringByAppendingString:textView.text];
+            self.plainText =
+                [self.plainText stringByAppendingString:[NSString stringWithFormat:@"listTextView:%@;", textView.text]];
         }
 
     } else if ([view isKindOfClass:[UILabel class]]) {
@@ -539,6 +554,8 @@ static const char *kAssociatedObjectKey;
         htmlConvertedText = [NSString stringWithFormat:@"<p visibility=\'%@\' font-size=\'%d\'>", visibility, fontSize];
         if (label.text != nil && ![label.text isEqualToString:@""]) {
             htmlConvertedText = [htmlConvertedText stringByAppendingString:label.text];
+            self.plainText =
+                [self.plainText stringByAppendingString:[NSString stringWithFormat:@"listLabel:%@;", label.text]];
         }
     }
 
@@ -693,66 +710,88 @@ static const char *kAssociatedObjectKey;
 }
 
 - (NSString *)getViewTreeLink {
+    /**
+     * View tree link format :
+     * https://{reverse_bundle_id}.imnapp/version_id/{view_controller_name}/intent/{parameters_json_format}/segment/{segment_hash}/title/{title}
+     * If webview is dominant :
+     * https://{reverse_bundle_id}.imnapp/version_id/{view_controller_name}/url/{webview_url}
+     **/
+
     NSString *classname = [NSStringFromClass(self.shadowViewController.class) lowercaseString];
     NSString *link      = [MNALUtils getURIForControllerName:classname];
-
-    NSMutableArray *params = [[NSMutableArray alloc] init];
-    BOOL isDominant        = (self.isDominantWebview && self.dominantWebviewUrl != nil);
-
-    if (isDominant) {
-        NSString *encodedUrl    = [MNALUtils getEncodedLink:self.dominantWebviewUrl];
-        NSString *webviewParams = [NSString stringWithFormat:@"%@=%@", @"url", encodedUrl];
-        [params addObject:webviewParams];
-    } else {
-        NSString *segmentLink = [MNALUtils getEncodedLink:self.uniqueSegmentLink];
-        if (segmentLink != nil && ![segmentLink isEqualToString:@""]) {
-            [params addObject:segmentLink];
-        }
-
-        // Adding a unique identifier for the url
-        NSString *vcPropStr = [self getUniqueIdStrForCurrentVC];
-        vcPropStr           = [NSString stringWithFormat:@"%@=%@", @"intent", vcPropStr];
-        NSString *uniqueId  = [MNALUtils encodeUrlComponent:vcPropStr];
-        [params addObject:uniqueId];
+    if (link == nil) {
+        return @"";
     }
 
-    NSString *paramsStr = [params componentsJoinedByString:@"&"];
-    link                = [NSString stringWithFormat:@"%@?%@", link, paramsStr];
-    link                = [link lowercaseString];
+    BOOL isDominant = (self.isDominantWebview && self.dominantWebviewUrl != nil);
 
+    if (isDominant) {
+        NSString *encodedUrl = [MNALUtils getEncodedLink:self.dominantWebviewUrl];
+        link                 = [link stringByAppendingString:[NSString stringWithFormat:@"/%@/%@", @"url", encodedUrl]];
+        return [[self appendTitleToLink:link] lowercaseString];
+    }
+
+    // Create link with intent string
+    NSString *intentStr = [self getUniqueIdStrForCurrentVC];
+    if (intentStr && [intentStr isEqualToString:@""] == NO) {
+        link = [link stringByAppendingString:[NSString stringWithFormat:@"/%@/%@", @"intent",
+                                                                        [MNALUtils getEncodedLink:intentStr]]];
+    }
+
+    if (self.uniqueSegmentLink && [self.uniqueSegmentLink isEqualToString:@""] == NO) {
+        link = [link
+            stringByAppendingString:[NSString
+                                        stringWithFormat:@"/%@/%@", @"segment",
+                                                         [MNALUtils getEncodedLink:[self.uniqueSegmentLink MD5]]]];
+    }
+
+    link = [[self appendTitleToLink:link] lowercaseString];
     MNALLinkLog(@"LINK: %@", link);
+    return link;
+}
 
+- (NSString *)appendTitleToLink:(NSString *)link {
+    if (self.isTitleEnabled && self.shadowViewController.title != nil &&
+        [self.shadowViewController.title isEqualToString:@""] == NO) {
+        link = [link
+            stringByAppendingString:[NSString
+                                        stringWithFormat:@"/%@/%@", @"title",
+                                                         [MNALUtils getEncodedLink:self.shadowViewController.title]]];
+    }
     return link;
 }
 
 - (NSString *)getUniqueIdStrForCurrentVC {
-    NSString *hashStr;
+    NSString *intentJsonString;
 
     // Can possibly check for respondsToSelector here as well.
     // Going with the pythonic way :)
     @try {
-        hashStr = objc_getAssociatedObject(self.shadowViewController, kAssociatedObjectKey);
+        intentJsonString = objc_getAssociatedObject(self.shadowViewController, kAssociatedObjectKey);
     } @catch (NSException *exception) {
         MNALLinkLog(@"Exception when getting the associated object");
         MNALLinkLog(@"%@", exception);
     }
 
-    if (hashStr && ![hashStr isEqualToString:@""]) {
-        return hashStr;
+    if (intentJsonString && ![intentJsonString isEqualToString:@""]) {
+        return intentJsonString;
     }
 
     // check if current vc has the property.
-    hashStr = [MNALUtils getContentHash:self.shadowViewController viewTreeContent:self.plainText];
+    intentJsonString = [MNALUtils getJsonStringOfPropertiesForViewController:self.shadowViewController
+                                                                    skipList:self.intentSkipList
+                                                                     content:self.plainText
+                                                                contentLimit:self.contentLimit];
 
     @try {
-        objc_setAssociatedObject(self.shadowViewController, kAssociatedObjectKey, hashStr,
+        objc_setAssociatedObject(self.shadowViewController, kAssociatedObjectKey, intentJsonString,
                                  OBJC_ASSOCIATION_COPY_NONATOMIC);
     } @catch (NSException *exception) {
         MNALLinkLog(@"Exception when setting the associated object");
         MNALLinkLog(@"%@", exception);
     }
 
-    return hashStr;
+    return intentJsonString;
 }
 
 /// Method to check if the VC is inside a tabBarController and is the immediate child of it
