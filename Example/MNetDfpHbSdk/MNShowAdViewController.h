@@ -13,14 +13,6 @@
 @interface MNShowAdViewController : UIViewController <GADBannerViewDelegate, GADInterstitialDelegate, GADAdSizeDelegate>
 
 typedef enum {
-    AD_MOB_HB,
-    DFP_HB,
-    DFP_INTERSTITIAL_HB,
-    DFP_REWARDED,
-    DFP_MEDIATION,
-    ADMOB_MEDIATION,
-    ADMOB_INTERSTITIAL_MEDIATION,
-    DFP_INTERSTITIAL_MEDIATION,
     DFP_BANNER_MANUAL_HB,
     DFP_INSTERSTITIAL_MANUAL_HB,
     MNET_AUTOMATION_DFP_ADVIEW,

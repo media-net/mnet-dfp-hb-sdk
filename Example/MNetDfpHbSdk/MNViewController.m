@@ -10,7 +10,6 @@
 #import "MNDemoConstants.h"
 #import "MNShowAdViewController.h"
 
-#import "CMPConsentToolViewController.h"
 #import "MNURLConfigViewController.h"
 #import <EventKit/EventKit.h>
 #import <Photos/Photos.h>
@@ -29,7 +28,7 @@ static const CGFloat tableviewCellSideMargin = 10.0f;
 static const CGFloat sectionTitleHeight      = 50.0f;
 static const CGFloat sectionFooterViewHeight = 30.0f;
 
-@interface MNViewController () <UITableViewDelegate, UITableViewDataSource, CMPConsentToolViewControllerDelegate>
+@interface MNViewController () <UITableViewDelegate, UITableViewDataSource>
 - (IBAction)configAction:(id)sender;
 - (IBAction)consentAction:(id)sender;
 
@@ -60,26 +59,6 @@ static const CGFloat sectionFooterViewHeight = 30.0f;
     self.topBar.layer.shadowOffset  = CGSizeMake(0, blurRadius);
     self.topBar.layer.shadowRadius  = blurRadius;
     self.topBar.layer.shadowColor   = [[UIColor blackColor] CGColor];
-}
-
-- (void)askForConsent {
-    CMPConsentToolViewController *consentToolVC = [[CMPConsentToolViewController alloc] init];
-    consentToolVC.consentToolURL                = [NSURL URLWithString:@"http://cmp.msas.media.net/"];
-    consentToolVC.consentToolAPI.cmpPresent     = YES;
-    consentToolVC.consentToolAPI.subjectToGDPR  = SubjectToGDPR_Yes;
-    consentToolVC.delegate                      = self;
-    [self presentViewController:consentToolVC animated:YES completion:nil];
-}
-
-#pragma mark - CMPConsentToolViewControllerDelegate
-- (void)consentToolViewController:(CMPConsentToolViewController *)consentToolViewController
-          didReceiveConsentString:(NSString *)consentString {
-    [consentToolViewController dismissViewControllerAnimated:YES completion:nil];
-
-    NSLog(@"PurposeConsentBitString from CMPDataStorage: %@",
-          consentToolViewController.consentToolAPI.parsedPurposeConsents);
-    NSLog(@"VendorConsentBitString from CMPDataStorage: %@",
-          consentToolViewController.consentToolAPI.parsedVendorConsents);
 }
 
 - (void)initializeAdsListArr {
@@ -379,7 +358,7 @@ static const CGFloat sectionFooterViewHeight = 30.0f;
 }
 
 - (IBAction)consentAction:(id)sender {
-    [self askForConsent];
+    // Pass
 }
 
 @end
