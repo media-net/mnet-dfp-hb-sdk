@@ -1,6 +1,6 @@
 dependencies: \
-  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-s9s3ibkl/Pods/MNetJSONModeller/MNJModeller/Classes/MNJMClassPropertyManager.m \
-  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-s9s3ibkl/Pods/Target\ Support\ Files/MNetJSONModeller/MNetJSONModeller-prefix.pch \
-  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-s9s3ibkl/Pods/MNetJSONModeller/MNJModeller/Classes/MNJMClassPropertyManager+Internal.h \
-  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-s9s3ibkl/Pods/MNetJSONModeller/MNJModeller/Classes/MNJMClassPropertyManager.h \
-  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-s9s3ibkl/Pods/MNetJSONModeller/MNJModeller/Classes/LRU/MNJMLRUManager.h
+  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-obbsj12t/Pods/MNetJSONModeller/MNJModeller/Classes/MNJMClassPropertyManager.m \
+  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-obbsj12t/Pods/Target\ Support\ Files/MNetJSONModeller/MNetJSONModeller-prefix.pch \
+  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-obbsj12t/Pods/MNetJSONModeller/MNJModeller/Classes/MNJMClassPropertyManager+Internal.h \
+  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-obbsj12t/Pods/MNetJSONModeller/MNJModeller/Classes/MNJMClassPropertyManager.h \
+  /var/folders/jg/5ptshz9j5hl4ycg57z6r1vxr5wpvb6/T/cocoapods-obbsj12t/Pods/MNetJSONModeller/MNJModeller/Classes/LRU/MNJMLRUManager.h
