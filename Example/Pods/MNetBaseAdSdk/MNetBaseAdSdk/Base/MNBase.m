@@ -21,12 +21,11 @@
 #import "MNBaseSdkConfig.h"
 #import "MNBaseUtil.h"
 #import <AFNetworking/AFNetworkReachabilityManager.h>
+#import <MNALAppLink/MNALAppLink.h>
 
 #define DEFAULT_COLOR [UIColor colorWithRed:47 / 255.0 green:58 / 255.0 blue:74 / 255.0 alpha:1]
 #define MNET_BASE_AD_SDK_VERSION_CODE 1
-// TODO MNBase right now keeping the base sdk version same as current ad sdk. Need to discuss the versioning of sdk's
-// according to revamp structure
-#define MNET_BASE_AD_SDK_VERSION_NAME @"0.9.1"
+#define MNET_BASE_AD_SDK_VERSION_NAME @"0.9.2"
 
 @interface MNBase ()
 @property NSString *visitId;
@@ -38,7 +37,8 @@
 @synthesize sdkVersionName   = _sdkVersionName;
 @synthesize sdkVersionNumber = _sdkVersionNumber;
 
-static MNBase *sInstance = nil;
+static MNBase *sInstance        = nil;
+static NSString *customBundleId = nil;
 
 - (id)init {
     self = [super init];
@@ -114,6 +114,27 @@ static MNBase *sInstance = nil;
     instance.isLogsEnabled = enabled;
 }
 
+/// Set the custom-bundle-id. Will be reset if argument is nil or empty string
++ (void)setCustomBundleId:(NSString *_Nullable)bundleId {
+    if (bundleId == nil) {
+        customBundleId = nil;
+        return;
+    }
+    bundleId = [bundleId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([bundleId isEqualToString:@""]) {
+        customBundleId = nil;
+        return;
+    }
+    customBundleId = bundleId;
+    // Set this value into the MNALApplink as well
+    [MNALAppLink setCustomBundleId:bundleId];
+}
+
+/// Returns the custom-bundle-id if set. Will return nil if not set.
++ (NSString *_Nullable)getCustomBundleId {
+    return customBundleId;
+}
+
 - (NSString *)getVisitId {
     NSString *visitId;
     if (sInstance) {
@@ -153,7 +174,6 @@ static MNBase *sInstance = nil;
 
     [MNBaseHttpClient makeLatencyTestRequest];
 
-    // TODO MNBase discuss
     [MNBaseAdDetailsStore initializeStore];
 
     [MNBaseSdkConfig initSdkConfig];

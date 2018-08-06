@@ -268,7 +268,7 @@ NSString *const kMNBaseAdCodeCookieStoreKey = @"mnet_adcode_cookies";
     NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
 
     // Checking if custom-bundle-id is required
-    NSString *customBundleId = [[MNBase getInstance] customBundleId];
+    NSString *customBundleId = [MNBase getCustomBundleId];
     if (customBundleId != nil && NO == [customBundleId isEqualToString:@""]) {
         bundleId = customBundleId;
     }
@@ -700,14 +700,13 @@ NSString *const kMNBaseAdCodeCookieStoreKey = @"mnet_adcode_cookies";
 }
 
 + (NSString *)getLinkFromApplink:(UIViewController *)vc {
-
     NSArray<NSString *> *skipList =
         [[MNBaseSdkConfig getInstance] fetchIntentSkipListForViewController:NSStringFromClass([vc class])];
     NSInteger contentLimit = [[MNBaseSdkConfig getInstance] getIntentContentLimit];
     BOOL isTitleEnabled    = [[MNBaseSdkConfig getInstance] isCrawledLinkTitleEnabled];
 
     MNALAppLink *applink = [MNALAppLink getInstanceWithVC:vc
-                                       withContentEnabled:YES
+                                       withContentEnabled:NO
                                        withIntentSkipList:skipList
                                              contentLimit:contentLimit
                                              titleEnabled:isTitleEnabled];

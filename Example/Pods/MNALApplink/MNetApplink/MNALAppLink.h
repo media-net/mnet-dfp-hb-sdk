@@ -57,4 +57,11 @@
 /// Returns if forced-view-content-fetch is enabled.
 + (BOOL)isAggressiveViewContentFetch;
 
+/// Setting a custom bundle id.
+/// The value will be reset on nil or empty string.
++ (void)setCustomBundleId:(NSString *_Nullable)bundleId;
+
+/// Will return the custom bundle id if set. Returns nil if not set
++ (NSString *_Nullable)getCustomBundleId;
+
 @end

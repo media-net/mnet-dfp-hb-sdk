@@ -1,0 +1,22 @@
+{
+  "name": "MNALApplink",
+  "version": "0.14.0",
+  "summary": "Generates View tree and Unique link for a given ViewController",
+  "description": "Generates View tree and Unique link for a given ViewController.\nBoth of these entities are required by the ad-sdk and the crawler.",
+  "homepage": "https://github.com/media-net/mnet-ios-applink",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gnithin": "nithin.g@directi.com"
+  },
+  "source": {
+    "git": "https://github.com/media-net/mnet-ios-applink",
+    "tag": "0.14.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MNetApplink/**/*"
+}

@@ -650,7 +650,7 @@ static const char *kAssociatedObjectKey;
     }
 
     NSString *title = @"";
-    if (![[[NSBundle mainBundle] bundleIdentifier] isEqualToString:MNAL_WIKIPEDIA_BUNDLE]) {
+    if (![[MNALUtils getMainBundleId] isEqualToString:MNAL_WIKIPEDIA_BUNDLE]) {
         title = [MNALUtils getTitleForController:controller];
     }
 

@@ -18,7 +18,13 @@
 + (NSError *)createErrorWithDescription:(NSString *)descriptionStr;
 + (NSNumber *)getTimestamp;
 + (NSString *)truncateNodeIdStr:(NSString *)nodeIdStr;
+
+/// Return the main bundle's identifier. It will return the custom-bundle if set in MNALApplink
++ (NSString *)getMainBundleId;
+
+/// Return the bundle id. Will return with prefix if set
 + (NSString *)getBundleId;
+
 + (NSString *)encodeUrlComponent:(NSString *)str;
 + (NSString *)getTitleForController:(UIViewController *)controller;
 + (NSString *)getRandomString;

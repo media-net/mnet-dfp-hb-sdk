@@ -55,8 +55,18 @@
     return updatedStr;
 }
 
+/// Return the main bundle's identifier. It will return the custom-bundle if set in MNALApplink
++ (NSString *)getMainBundleId {
+    NSString *customBundleId = [MNALAppLink getCustomBundleId];
+    if (customBundleId != nil && NO == [customBundleId isEqualToString:@""]) {
+        return customBundleId;
+    }
+    return [[NSBundle mainBundle] bundleIdentifier];
+}
+
+/// Return the bundle id. Will return with prefix if set
 + (NSString *)getBundleId {
-    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    NSString *bundleId = [self getMainBundleId];
 
     NSString *suffix = [MNALAppLink getSuffixForBundleId];
     if (suffix != nil) {

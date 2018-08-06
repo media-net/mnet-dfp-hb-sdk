@@ -30,9 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property BOOL isLogsEnabled;
 
-/// Setting a custom bundle-id. This will not be necessary other than testing purposes.
-@property (atomic, nullable) NSString *customBundleId;
-
 /// Wrapper SDK version name
 @property (atomic) NSString *sdkVersionName;
 
@@ -77,6 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Get the current base sdk version code
 + (NSUInteger)getBaseSdkVersionCode;
+
+/// Set the custom-bundle-id. Will be reset if argument is nil or empty string
++ (void)setCustomBundleId:(NSString *_Nullable)bundleId;
+
+/// Returns the custom-bundle-id if set. Will return nil if not set.
++ (NSString *_Nullable)getCustomBundleId;
 
 /// Get status if the app is initialized
 + (BOOL)isInitialized;

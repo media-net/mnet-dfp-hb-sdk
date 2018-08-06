@@ -69,8 +69,7 @@
     double contentFetchDuration = [endTime doubleValue] - [startTime doubleValue];
 
     NSString *VCLink = [appLink getLink];
-    MNLogD(@"LINK: %@", VCLink);
-    MNLogD(@"CONTENT: %@", [appLink getContent]);
+    MNLogD(@"APP_CONTENT: link - %@", VCLink);
 
     VCLink               = [VCLink lowercaseString];
     originalCrawlingLink = [originalCrawlingLink lowercaseString];

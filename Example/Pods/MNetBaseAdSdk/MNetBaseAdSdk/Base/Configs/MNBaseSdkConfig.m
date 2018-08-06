@@ -108,13 +108,9 @@ static MNBaseSdkConfig *instance;
         headers:nil
         params:nil
         success:^(NSDictionary *response) {
-          MNLogD(@"got config response %@", response);
           if (response == nil) {
               MNLogD(@"config response is nil. Not updating anything");
               return;
-          }
-          if (response != nil) {
-              MNLogD(@"config response body %@", [MNJMManager toJSONStr:response]);
           }
           // Update the instance with new config fetched
           MNBaseConfig *mnetConfig = [[MNBaseConfig alloc] init];

@@ -10,6 +10,7 @@
 
 static BOOL shouldPrintLogs        = NO;
 static BOOL forcedViewContentFetch = NO;
+static NSString *customBundleId    = nil;
 
 @implementation MNALAppLink
 
@@ -119,6 +120,27 @@ static NSString *bundleIdSuffix;
 /// Returns if forced-view-content-fetch is enabled.
 + (BOOL)isAggressiveViewContentFetch {
     return forcedViewContentFetch;
+}
+
+/// Setting a custom bundle id.
+/// The value will be reset on nil or empty string.
++ (void)setCustomBundleId:(NSString *)bundleId {
+    if (bundleId == nil) {
+        customBundleId = nil;
+        return;
+    }
+    bundleId = [bundleId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([bundleId isEqualToString:@""]) {
+        customBundleId = nil;
+        return;
+    }
+    customBundleId = bundleId;
+    return;
+}
+
+/// Will return the custom bundle id if set. Returns nil if not set
++ (NSString *_Nullable)getCustomBundleId {
+    return customBundleId;
 }
 
 @end

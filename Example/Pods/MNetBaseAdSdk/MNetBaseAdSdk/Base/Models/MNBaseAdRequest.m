@@ -55,7 +55,7 @@
     }
 
     NSString *extUrl = [MNBaseUtil getLinkForVC:self.rootViewController];
-    MNLogD(@"LINK: %@", extUrl);
+    MNLogD(@"Ext url from root-vc - %@", extUrl);
 
     if (extUrl != nil) {
         [[MNBaseLinkStore getSharedInstance] setLink:extUrl];

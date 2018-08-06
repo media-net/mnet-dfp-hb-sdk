@@ -36,7 +36,7 @@
         return nil;
     }
 
-    MNLogD(@"PREFETCH_REQ: Prefetch request made");
+    MNLogD(@"PREFETCH_REQ: Prefetching request with link - %@", [adRequest contextLink]);
 
     // Perform the actual request here
     MNBaseAdLoaderOptions *options = [MNBaseAdLoaderOptions getDefaultOptions];

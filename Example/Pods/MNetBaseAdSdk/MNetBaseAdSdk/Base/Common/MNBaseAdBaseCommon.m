@@ -1535,16 +1535,17 @@
 
 - (NSString *)fetchVCLink {
     if (self.contextLink) {
-        MNLogD(@"MNBase: Context link : %@", self.contextLink);
+        MNLogD(@"MNBase: Context link from contextLink : %@", self.contextLink);
         return self.contextLink;
     } else if (self.vcLink) {
-        MNLogD(@"MNBase: Context link : %@", self.vcLink);
+        MNLogD(@"MNBase: Context link from vcLink : %@", self.vcLink);
         return self.vcLink;
     } else if (self.rootViewController) {
         self.vcLink = [MNBaseUtil getLinkForVC:self.rootViewController];
-        MNLogD(@"LINK: %@", self.vcLink);
+        MNLogD(@"MNBase: Context link from vc - %@", self.vcLink);
         return self.vcLink;
     }
+    MNLogD(@"MNBase: Context link set to default bundle url");
     return [MNBaseUtil getDefaultBundleUrl];
 }
 
