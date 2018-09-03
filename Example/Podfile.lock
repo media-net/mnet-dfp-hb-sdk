@@ -16,14 +16,14 @@ PODS:
     - AFNetworking/NSURLSession
   - Google-Mobile-Ads-SDK (7.31.0)
   - MBProgressHUD (1.1.0)
-  - MNALApplink (0.17.0)
-  - MNetBaseAdSdk (0.10.7):
+  - MNALApplink (0.18.1)
+  - MNetBaseAdSdk (0.10.8):
     - AFNetworking (= 3.1.0)
-    - MNALApplink (= 0.17.0)
+    - MNALApplink (= 0.18.1)
     - MNetJSONModeller (= 1.1.6)
-  - MNetDfpHbSdk (1.0.3):
+  - MNetDfpHbSdk (1.0.4):
     - Google-Mobile-Ads-SDK (>= 7.0)
-    - MNetBaseAdSdk (= 0.10.7)
+    - MNetBaseAdSdk (= 0.10.8)
   - MNetJSONModeller (1.1.6)
   - Toast (3.1.0)
 
@@ -51,9 +51,9 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Google-Mobile-Ads-SDK: 6e529e748b45507a2ca904e0b5a52669ba3920c4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MNALApplink: 2a76dd33ea1c1f392e2c5142d64f90095fc6f184
-  MNetBaseAdSdk: ed3ec87d837dd2436ce756440386dfc4c9675203
-  MNetDfpHbSdk: 1f4aba2dfa860c9130ac6a66d6cc7a2510b5f2df
+  MNALApplink: 8d231bd93addf100b7e987e0713a50e73b21bb39
+  MNetBaseAdSdk: 8c39535ad877ea64f4d21112187058873b1e05f7
+  MNetDfpHbSdk: 9877b9c75791ddbadc688e2c3b8def19f1b317a6
   MNetJSONModeller: 470c7e65d54ab5732f724bfe23d286d9a5d5fd9c
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
 
