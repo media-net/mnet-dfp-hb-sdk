@@ -19,15 +19,17 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AB282053A5D43A69F1AEFCF5 /* Pods_MNetDfpHbSdk_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9468F65DA597D5CBF52F5D0A /* Pods_MNetDfpHbSdk_Example.framework */; };
+		AE337BB1217DC7A60042ADB2 /* MNetDfpFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */; };
 		AE9866A820F360CF00119944 /* MNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866A720F360CF00119944 /* MNViewController.m */; };
 		AE9866AB20F3614E00119944 /* MNShowAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866AA20F3614E00119944 /* MNShowAdViewController.m */; };
 		AE9866AE20F361AE00119944 /* MNURLConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866AD20F361AE00119944 /* MNURLConfigViewController.m */; };
 		AE9866B120F362EF00119944 /* MNDemoConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866B020F362EF00119944 /* MNDemoConstants.m */; };
 		AE9866B420F3642A00119944 /* MNTestDevicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866B320F3642A00119944 /* MNTestDevicesManager.m */; };
+		C86C95A4215CCE470016A736 /* MNetDfpHbSdkUItest.m in Sources */ = {isa = PBXBuildFile; fileRef = C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */; };
+		C8DE5B28216C956600CF7BEC /* MNetInternetFailureUITest.m in Sources */ = {isa = PBXBuildFile; fileRef = C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */; };
 		EB6C4DEB84414B7FD9791556 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B95C3DA818D2FEDEA1B4A3C /* Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35546CE472AE6E06815FEAB0 /* Pods_MNetDfpHbSdk_Example_MNetDfpHbSdk_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Example_MNetDfpHbSdk_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B315F28E00F0906FE33CD7C /* Pods-MNetDfpHbSdk_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* MNetDfpHbSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MNetDfpHbSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,14 +65,15 @@
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8FF9CCD8993C0E3349D82CB8 /* Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig"; sourceTree = "<group>"; };
 		91676BE5883E0E93580AA7C9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9468F65DA597D5CBF52F5D0A /* Pods_MNetDfpHbSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98CFC1A18F4F6257A75934CE /* Pods-MNetDfpHbSdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AB7FA41AE34DA0BFBD8230D5 /* MNetDfpHbSdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MNetDfpHbSdk.podspec; path = ../MNetDfpHbSdk.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpFilterTest.m; sourceTree = "<group>"; };
 		AE9866A620F360CF00119944 /* MNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNViewController.h; sourceTree = "<group>"; };
 		AE9866A720F360CF00119944 /* MNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNViewController.m; sourceTree = "<group>"; };
 		AE9866A920F3614E00119944 /* MNShowAdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNShowAdViewController.h; sourceTree = "<group>"; };
@@ -80,6 +85,8 @@
 		AE9866B220F3642A00119944 /* MNTestDevicesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNTestDevicesManager.h; sourceTree = "<group>"; };
 		AE9866B320F3642A00119944 /* MNTestDevicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNTestDevicesManager.m; sourceTree = "<group>"; };
 		BDAF4EABA83F5946A0A3EFC1 /* Pods-MNetDfpHbSdk_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpHbSdkUItest.m; sourceTree = "<group>"; };
+		C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetInternetFailureUITest.m; sourceTree = "<group>"; };
 		CC673DA51C8CB3213AFCEFE3 /* Pods-MNetDfpHbSdk_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DC849EC681D8B70B9552B9F4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +147,7 @@
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				9468F65DA597D5CBF52F5D0A /* Pods_MNetDfpHbSdk_Example.framework */,
 				0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */,
+				35546CE472AE6E06815FEAB0 /* Pods_MNetDfpHbSdk_Example_MNetDfpHbSdk_UITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -184,8 +192,10 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
+				C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */,
+				AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -217,6 +227,8 @@
 				5B315F28E00F0906FE33CD7C /* Pods-MNetDfpHbSdk_Example.release.xcconfig */,
 				BDAF4EABA83F5946A0A3EFC1 /* Pods-MNetDfpHbSdk_Tests.debug.xcconfig */,
 				98CFC1A18F4F6257A75934CE /* Pods-MNetDfpHbSdk_Tests.release.xcconfig */,
+				0B95C3DA818D2FEDEA1B4A3C /* Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig */,
+				8FF9CCD8993C0E3349D82CB8 /* Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -252,6 +264,7 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
+				BE522EAE7100C79DCACC1B04 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -400,6 +413,28 @@
 			shellPath = /bin/sh;
 			shellScript = "# Clang-formatting the code\n\nif ! [ -x \"$(command -v clang-format)\" ]; then\necho 'Error: clang-format is not installed. Skipping formatting'\nexit 0\nfi\n\narray=( $(find ../MNetDfpHbSdk \\( -name '*.h' -or -name '*.m' -or -name '*.mm' \\)) )\narray+=( $(find MNetDfpHbSdk \\( -name '*.h' -or -name '*.m' -or -name '*.mm' \\)) )\n\n# loop over it\nfor i in ${array[@]}\ndo\nif [ -f \"$i\" ]\nthen\nclang-format -i -style=\"{BasedOnStyle: LLVM, IndentWidth: 4 ,ColumnLimit: 120,AlignAfterOpenBracket : Align,AlignTrailingComments : true,AlignConsecutiveAssignments : true,PointerAlignment : Right,SpaceAfterCStyleCast : true,SpaceBeforeAssignmentOperators : true,SpaceInEmptyParentheses :  false,SpacesBeforeTrailingComments : 1,SpacesInCStyleCastParentheses : false,ObjCSpaceAfterProperty : true,ReflowComments : true,SortIncludes : true}\" $i\n\nfi\ndone";
 		};
+		BE522EAE7100C79DCACC1B04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KIF/KIF.framework",
+				"${BUILT_PRODUCTS_DIR}/NetworkEye/NetworkEye.framework",
+				"${BUILT_PRODUCTS_DIR}/Nocilla/Nocilla.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KIF.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkEye.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nocilla.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -422,7 +457,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				C86C95A4215CCE470016A736 /* MNetDfpHbSdkUItest.m in Sources */,
+				C8DE5B28216C956600CF7BEC /* MNetInternetFailureUITest.m in Sources */,
+				AE337BB1217DC7A60042ADB2 /* MNetDfpFilterTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +504,7 @@
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -520,6 +558,7 @@
 		6003F5BE195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

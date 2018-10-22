@@ -12,5 +12,8 @@ target 'MNetDfpHbSdk_Example' do
 
   target 'MNetDfpHbSdk_Tests' do
     inherit! :search_paths
+    pod 'KIF', git: 'https://github.com/kif-framework/KIF.git', branch: 'master'
+    pod 'NetworkEye'
+    pod 'Nocilla'
   end
 end

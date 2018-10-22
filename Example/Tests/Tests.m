@@ -7,6 +7,7 @@
 //
 
 @import XCTest;
+@import MNetDfpHbSdk;
 
 @interface Tests : XCTestCase
 
@@ -29,6 +30,68 @@
 - (void)testExample
 {
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+}
+
+- (void)testAdUnitFilter{
+    MNetDfpAdUnitFilterAdUnitId *filter = [[MNetDfpAdUnitFilterAdUnitId alloc] init];
+    
+    /*
+     [
+        <CONFIG-AD-UNIT>,
+        <PUBLISHER-AD-UNIT>,
+        <Expected match, 1 for true>,
+     ]
+     */
+    NSArray<NSArray<NSString *> *> *testCases = @[
+                           // c-ad-unit should match pub-ad-unit with urls and other stuff
+                           @[
+                               @"8CU12342",
+                               @"8CU12342/sample-url-added-unnecessarily",
+                               @"1"
+                            ],
+                           @[
+                               @"8CU12342",
+                               @"sample-url-added-unnecessarily-8CU12342",
+                               @"1"
+                            ],
+                           @[
+                               @"8CU12342/sample-url-added-unnecessarily",
+                               @"8CU12342",
+                               @"0"
+                            ],
+                           // Exact match checks
+                           @[
+                               @"8CU12342",
+                               @"8CU12342",
+                               @"1"
+                            ],
+                           @[
+                               @"8CU012342",
+                               @"8CU102342",
+                               @"0"
+                            ],
+                           // Empty pub-ad-unit should not match config-ad-unit
+                           @[
+                               @"8CU012342",
+                               @"",
+                               @"0"
+                               ],
+                           // Empty config-ad-unit should not match anything
+                           @[
+                               @"",
+                               @"8CU012342",
+                               @"0"
+                            ],
+                           ];
+    
+    for (NSArray<NSString *> *test in testCases){
+        NSString *configAdUnitId = test[0];
+        NSString *pubAdUnitId = test[1];
+        BOOL expectedMatch = [test[2] isEqualToString:@"1"];
+        
+        BOOL actualMatch = [filter matchConfigAdUnitId:configAdUnitId WithPubId:pubAdUnitId];
+        XCTAssert(expectedMatch == actualMatch, @"Expected %@, but got %@ for config-ad-unit %@, pub-ad-unit %@", expectedMatch?@"YES":@"NO", actualMatch?@"YES":@"NO", configAdUnitId, pubAdUnitId);
+    }
 }
 
 @end
