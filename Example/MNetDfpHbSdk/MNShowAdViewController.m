@@ -253,7 +253,6 @@ static NSArray<NSString *> *testDevicesList;
         [request setCustomTargeting:@{@"pos" : @"i2"}];
         [request setTestDevices:testDevicesList];
 
-        [request setTestDevices:testDevicesList];
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         [request setGender:kGADGenderFemale];

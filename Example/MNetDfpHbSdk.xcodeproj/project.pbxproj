@@ -29,6 +29,8 @@
 		AE9866B120F362EF00119944 /* MNDemoConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866B020F362EF00119944 /* MNDemoConstants.m */; };
 		AE9866B420F3642A00119944 /* MNTestDevicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866B320F3642A00119944 /* MNTestDevicesManager.m */; };
 		C86C95A4215CCE470016A736 /* MNetDfpHbSdkUItest.m in Sources */ = {isa = PBXBuildFile; fileRef = C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */; };
+		C882F974217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */; };
+		C882F976217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */; };
 		C8DE5B28216C956600CF7BEC /* MNetInternetFailureUITest.m in Sources */ = {isa = PBXBuildFile; fileRef = C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */; };
 		EB6C4DEB84414B7FD9791556 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +88,8 @@
 		AE9866B320F3642A00119944 /* MNTestDevicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNTestDevicesManager.m; sourceTree = "<group>"; };
 		BDAF4EABA83F5946A0A3EFC1 /* Pods-MNetDfpHbSdk_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpHbSdkUItest.m; sourceTree = "<group>"; };
+		C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpBannerAdParameterTest.m; sourceTree = "<group>"; };
+		C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetMNetDfpInterstitialAdParameterTest.m; sourceTree = "<group>"; };
 		C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetInternetFailureUITest.m; sourceTree = "<group>"; };
 		CC673DA51C8CB3213AFCEFE3 /* Pods-MNetDfpHbSdk_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DC849EC681D8B70B9552B9F4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */,
 				AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */,
+				C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */,
+				C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -457,6 +463,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C882F976217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m in Sources */,
+				C882F974217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m in Sources */,
 				C86C95A4215CCE470016A736 /* MNetDfpHbSdkUItest.m in Sources */,
 				C8DE5B28216C956600CF7BEC /* MNetInternetFailureUITest.m in Sources */,
 				AE337BB1217DC7A60042ADB2 /* MNetDfpFilterTest.m in Sources */,
