@@ -17,3 +17,26 @@ target 'MNetDfpHbSdk_Example' do
     pod 'Nocilla'
   end
 end
+
+# Kindly ignore this if the framework is being used
+# NOTE: Make sure that when testing the framework app, this is removed
+pre_install do |installer|
+  if ENV['DFP_POD_FMK'] === "NO"
+      installer.pod_targets.each do |pod|
+        if pod.name == "MNetDfpHbSdk"
+            puts "********************"
+            puts "*** Overriding the static_framework? method for MNetDfpHbSdk ***"
+            puts "*** NOTE: If using framework, set env var. `export DFP_POD_FMK='YES'`"
+            puts "********************"
+            def pod.static_framework?;
+              true
+            end
+        end
+      end
+  else
+      puts "********************"
+      puts "*** Not enabling static framework ***"
+      puts "*** If using pod-source-files, set env var. `export DFP_POD_FMK='NO'` for ad-sdk to build. Else it will fail ***"
+      puts "********************"
+  end
+end
