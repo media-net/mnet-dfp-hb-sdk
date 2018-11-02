@@ -15,12 +15,14 @@
 @interface MNetDfpBannerAdParameterTest : XCTestCase <GADBannerViewDelegate, GADAdSizeDelegate>
 @property XCTestExpectation *testExpectation;
 @property NSArray *testDevicesList;
+@property UIViewController *vc;
 @end
 
 @implementation MNetDfpBannerAdParameterTest
 
 - (void)setUp {
     [super setUp];
+    self.vc = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     self.testDevicesList =  @[
                             // Iphone 5s
                             @"c43d79026c4919f2c46a6a5884cbe2e9",
@@ -45,7 +47,7 @@
     DFPBannerView *dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
 
     [dfpBannerView setAdUnitID:DEMO_DFP_AD_UNIT_ID];
-    [dfpBannerView setRootViewController:self];
+    [dfpBannerView setRootViewController:self.vc];
     [dfpBannerView setDelegate:self];
     DFPRequest *request = [DFPRequest request];
     [request setCustomTargeting:@{@"pos" : @"b"}];
@@ -79,6 +81,8 @@
                               withCompletionCb:^(DFPRequest *modifiedRequest, NSError *error) {
                                   if (error) {
                                       NSLog(@"Error when adding bids to request - %@", error);
+                                      [self.testExpectation fulfill];
+                                      return;
                                   }
                                   [dfpBannerView loadRequest:modifiedRequest];
                               }];
@@ -91,7 +95,7 @@
     DFPBannerView *dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     
     [dfpBannerView setAdUnitID:DEMO_DFP_AD_UNIT_ID];
-    [dfpBannerView setRootViewController:self];
+    [dfpBannerView setRootViewController:self.vc];
     [dfpBannerView setDelegate:self];
     DFPRequest *request = [DFPRequest request];
     [request setCustomTargeting:@{@"unknown" : @"nil"}];
@@ -120,6 +124,8 @@
                               withCompletionCb:^(DFPRequest *modifiedRequest, NSError *error) {
                                   if (error) {
                                       NSLog(@"Error when adding bids to request - %@", error);
+                                      [self.testExpectation fulfill];
+                                      return;
                                   }
                                   [dfpBannerView loadRequest:modifiedRequest];
                               }];
@@ -131,7 +137,7 @@
     DFPBannerView *dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     
     [dfpBannerView setAdUnitID:DEMO_DFP_AD_UNIT_ID];
-    [dfpBannerView setRootViewController:self];
+    [dfpBannerView setRootViewController:self.vc];
     [dfpBannerView setDelegate:self];
     DFPRequest *request = [DFPRequest request];
     [request setCustomTargeting:nil];
@@ -163,6 +169,8 @@
                               withCompletionCb:^(DFPRequest *modifiedRequest, NSError *error) {
                                   if (error) {
                                       NSLog(@"Error when adding bids to request - %@", error);
+                                      [self.testExpectation fulfill];
+                                      return;
                                   }
                                   [dfpBannerView loadRequest:modifiedRequest];
                               }];
@@ -175,7 +183,7 @@
     DFPBannerView *dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     
     [dfpBannerView setAdUnitID:DEMO_DFP_AD_UNIT_ID];
-    [dfpBannerView setRootViewController:self];
+    [dfpBannerView setRootViewController:self.vc];
     [dfpBannerView setDelegate:self];
     DFPRequest *request = [DFPRequest request];
     [request setCustomTargeting:@{@"gender" : @"male", @"section" : @[ @"sports", @"finance"]}];
@@ -206,6 +214,8 @@
                               withCompletionCb:^(DFPRequest *modifiedRequest, NSError *error) {
                                   if (error) {
                                       NSLog(@"Error when adding bids to request - %@", error);
+                                      [self.testExpectation fulfill];
+                                      return;
                                   }
                                   [dfpBannerView loadRequest:modifiedRequest];
                               }];
