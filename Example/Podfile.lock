@@ -24,7 +24,7 @@ PODS:
     - AFNetworking (= 3.1.0)
     - MNALApplink (= 0.18.2)
     - MNetJSONModeller (= 1.1.6)
-  - MNetDfpHbSdk (1.0.14):
+  - MNetDfpHbSdk (1.0.15):
     - Google-Mobile-Ads-SDK (>= 7.0)
     - MNetBaseAdSdk (= 0.10.18)
   - MNetJSONModeller (1.1.6)
@@ -74,7 +74,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MNALApplink: b5d81e3ee50df79a46581668ee49ed20cf0c726a
   MNetBaseAdSdk: 798539b39773f433baa2348caea288e4084fb882
-  MNetDfpHbSdk: e4f7410c45a2fbc0d5fc8053114d4477c3685cdc
+  MNetDfpHbSdk: a03f4e0e3936cef37749f457c1e695580e65a3e7
   MNetJSONModeller: 470c7e65d54ab5732f724bfe23d286d9a5d5fd9c
   NetworkEye: 54afcde161ab50e407445b86abd7350f3cd08533
   Nocilla: 7af7a386071150cc8aa5da4da97d060f049dd61c
