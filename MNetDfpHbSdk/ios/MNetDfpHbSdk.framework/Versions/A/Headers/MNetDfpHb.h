@@ -12,15 +12,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, MNetDfpHbGdprConsentStatus) {
-    MNetDfpHbGdprConsentStatusUnknown = 0, // Consent is UNKNOWN
+    MNetDfpHbGdprConsentStatusRevoked = 0, // Not consented
     MNetDfpHbGdprConsentStatusGiven   = 1, // Consented
-    MNetDfpHbGdprConsentStatusRevoked = 2, // Not consented
+    MNetDfpHbGdprConsentStatusUnknown = 2, // Consent is UNKNOWN
 };
 
 typedef NS_ENUM(NSInteger, MNetDfpHbSubjectToGdpr) {
-    MNetDfpHbSubjectoToGdprUnknown = -1, // GDPR applicability is UNKNOWN
-    MNetDfpHbSubjectToGdprDisabled = 0,  // GDPR not applicable
-    MNetDfpHbSubjectToGdprEnabled  = 1,  // GDPR applicable
+    MNetDfpHbSubjectToGdprDisabled = 0, // GDPR not applicable
+    MNetDfpHbSubjectToGdprEnabled  = 1, // GDPR applicable
+    MNetDfpHbSubjectoToGdprUnknown = 2, // GDPR applicability is UNKNOWN
 };
 
 - (instancetype)init __attribute__((unavailable("Please use +initWithCustomerId:")));

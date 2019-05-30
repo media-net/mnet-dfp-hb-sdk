@@ -20,13 +20,13 @@ PODS:
   - KIF/Core (3.7.4)
   - MBProgressHUD (1.1.0)
   - MNALApplink (0.18.2)
-  - MNetBaseAdSdk (0.10.16):
+  - MNetBaseAdSdk (0.10.18):
     - AFNetworking (= 3.1.0)
     - MNALApplink (= 0.18.2)
     - MNetJSONModeller (= 1.1.6)
-  - MNetDfpHbSdk (1.0.12):
+  - MNetDfpHbSdk (1.0.14):
     - Google-Mobile-Ads-SDK (>= 7.0)
-    - MNetBaseAdSdk (= 0.10.16)
+    - MNetBaseAdSdk (= 0.10.18)
   - MNetJSONModeller (1.1.6)
   - NetworkEye (1.0.6):
     - NetworkEye/standard (= 1.0.6)
@@ -73,8 +73,8 @@ SPEC CHECKSUMS:
   KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MNALApplink: b5d81e3ee50df79a46581668ee49ed20cf0c726a
-  MNetBaseAdSdk: a47347b40a8a42545f5cb191a4489a7f19a98555
-  MNetDfpHbSdk: 3789e241dd211b468838858ecb43d7440d9c706b
+  MNetBaseAdSdk: 798539b39773f433baa2348caea288e4084fb882
+  MNetDfpHbSdk: e4f7410c45a2fbc0d5fc8053114d4477c3685cdc
   MNetJSONModeller: 470c7e65d54ab5732f724bfe23d286d9a5d5fd9c
   NetworkEye: 54afcde161ab50e407445b86abd7350f3cd08533
   Nocilla: 7af7a386071150cc8aa5da4da97d060f049dd61c
