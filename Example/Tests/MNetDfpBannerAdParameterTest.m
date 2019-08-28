@@ -12,7 +12,7 @@
 @import GoogleMobileAds;
 
 
-@interface MNetDfpBannerAdParameterTest : XCTestCase <GADBannerViewDelegate, GADAdSizeDelegate>
+@interface MNetDfpBannerAdParameterTest : XCTestCase  <GADBannerViewDelegate, GADAdSizeDelegate>
 @property XCTestExpectation *testExpectation;
 @property NSArray *testDevicesList;
 @property UIViewController *vc;
@@ -129,7 +129,7 @@
                                   }
                                   [dfpBannerView loadRequest:modifiedRequest];
                               }];
-    [self waitForExpectationsWithTimeout:15 handler:nil];
+    [self waitForExpectationsWithTimeout:25 handler:nil];
 }
 - (void)testBannerAdWithCustomTargetEventExtraAndKeywordsNil{
     self.testExpectation = [self expectationWithDescription:@"App crash"];
@@ -174,7 +174,7 @@
                                   }
                                   [dfpBannerView loadRequest:modifiedRequest];
                               }];
-    [self waitForExpectationsWithTimeout:15 handler:nil];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
 - (void)testBannerAdWithCustomEventExtraAndKeywordsNonNil{

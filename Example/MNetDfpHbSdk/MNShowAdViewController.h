@@ -10,11 +10,14 @@
 #define ENUM_VAL(enum) [NSNumber numberWithInt:enum]
 @import GoogleMobileAds;
 
-@interface MNShowAdViewController : UIViewController <GADBannerViewDelegate, GADInterstitialDelegate, GADAdSizeDelegate>
+@interface MNShowAdViewController
+    : UIViewController <GADBannerViewDelegate, GADInterstitialDelegate, GADAdSizeDelegate, GADAdLoaderDelegate,
+                        DFPBannerAdLoaderDelegate, GADUnifiedNativeAdLoaderDelegate>
 
 typedef enum {
     DFP_BANNER_MANUAL_HB,
     DFP_INSTERSTITIAL_MANUAL_HB,
+    GAD_DFP,
     MNET_AUTOMATION_DFP_ADVIEW,
 } AdType;
 

@@ -27,5 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
                                              withAdView:(DFPInterstitial *)dfpView
                                        withCompletionCb:
                                            (void (^)(DFPRequest *_Nullable, NSError *_Nullable))completionCb;
+
+/// Add bids manually to the dfp request with ad loader object
+/// This will modify the existing dfp request object and
+/// return it in completion callback (completionCb)
++ (NSError *_Nullable)addBidsToAdRequest:(DFPRequest *)dfpAdRequest
+                         withGADAdLoader:(GADAdLoader *)adLoader
+                             withAdSizes:(NSArray *)adSizes
+                      rootViewController:(UIViewController *)rootVC
+                   withCompletionHandler:
+                       (void (^)(DFPRequest *_Nullable, GADAdLoader *_Nullable, NSError *_Nullable))completionCb;
+
 NS_ASSUME_NONNULL_END
 @end

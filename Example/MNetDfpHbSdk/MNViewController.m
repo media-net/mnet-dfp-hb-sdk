@@ -70,12 +70,14 @@ static const CGFloat sectionFooterViewHeight = 30.0f;
               @"rowContents" : @[
                   @{@"title" : @"DFP Banner HB", @"name" : ENUM_VAL(DFP_BANNER_MANUAL_HB)},
                   @{@"title" : @"DFP Interstitial HB", @"name" : ENUM_VAL(DFP_INSTERSTITIAL_MANUAL_HB)},
+                  @{@"title" : @"GAD DFP", @"name" : ENUM_VAL(GAD_DFP)}
               ]
           },
           @{
               @"sectionTitle" : @"Automation Tests",
               @"rowContents" : @[ @{@"title" : @"Auto-DFP-Ad", @"name" : ENUM_VAL(MNET_AUTOMATION_DFP_ADVIEW)} ]
           },
+
       ];
     });
 }

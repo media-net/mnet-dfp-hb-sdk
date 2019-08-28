@@ -38,6 +38,7 @@ GADBannerView *gadBannerView;
 DFPBannerView *dfpBannerView;
 DFPInterstitial *dfpInterstitialAd;
 GADInterstitial *gadInterstitialAd;
+GADAdLoader *gadAdLoader;
 
 static const NSDictionary<NSNumber *, NSString *> *titleStringMap;
 
@@ -286,6 +287,59 @@ static NSArray<NSString *> *testDevicesList;
                                         }];
         break;
     }
+
+    case GAD_DFP: {
+        [self addLoaderToScreen];
+
+        gadAdLoader =
+            [[GADAdLoader alloc] initWithAdUnitID:DEMO_DFP_AD_UNIT_ID
+                               rootViewController:self
+                                          adTypes:@[ kGADAdLoaderAdTypeDFPBanner, kGADAdLoaderAdTypeUnifiedNative ]
+                                          options:nil];
+        gadAdLoader.delegate = self;
+
+        DFPRequest *request = [DFPRequest request];
+        [request setCustomTargeting:@{@"pos" : @"1006"}];
+        [request setTestDevices:testDevicesList];
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        [request setGender:kGADGenderFemale];
+        [request setBirthday:[NSDate dateWithTimeIntervalSince1970:4]];
+#pragma GCC diagnostic pop
+        [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
+
+        [request setKeywords:@[ @"sports", @"scores" ]];
+
+        NSString *label                         = DFP_CUSTOM_EVENT_LABEL;
+        GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
+        [customEventExtras setExtras:@{
+            @"author" : @"hawking",
+            @"shape" : @"saddle",
+            @"element" : @"universe"
+            //@"content_link" : @"http://mnadsdkdemo.beta.media.net.imnapp/dfp_event_extras",
+        }
+                            forLabel:label];
+        NSLog(@"%@", [customEventExtras extrasForLabel:label]);
+        [request registerAdNetworkExtras:customEventExtras];
+
+        GADAdSize dfpAdSize = kGADAdSizeBanner;
+
+        // Manual header bidding
+        [MNetDfpBidder addBidsToAdRequest:request
+                          withGADAdLoader:gadAdLoader
+                              withAdSizes:@[ NSValueFromGADAdSize(dfpAdSize) ]
+                       rootViewController:self
+                    withCompletionHandler:^(DFPRequest *modifiedRequest, GADAdLoader *adLoader, NSError *error) {
+                      if (error) {
+                          NSLog(@"Error when adding bids to request - %@", error);
+                      }
+                      NSLog(@"Got modified dfp request with ad laoder");
+                      [adLoader loadRequest:modifiedRequest];
+                    }];
+
+        break;
+    }
+
     case MNET_AUTOMATION_DFP_ADVIEW: {
         [self addLoaderToScreen];
 
@@ -523,4 +577,39 @@ static const NSUInteger maxUnitsWhileLoading = 80;
     NSLog(@"DEALLOC: MNShowAdViewController");
 }
 
+#pragma mark - GADAdLoaderDelegate
+
+- (void)adLoaderDidFinishLoading:(GADAdLoader *)adLoader {
+    [self hideLoaderFromScreen];
+    NSLog(@"AdLoader finished loading");
+}
+
+- (void)adLoader:(GADAdLoader *)adLoader didFailToReceiveAdWithError:(GADRequestError *)error {
+    [self hideLoaderFromScreen];
+    NSLog(@"AdLaoder failed to receive ad with error %@", error.debugDescription);
+}
+
+#pragma mark - DFPBannerAdLoaderDelegate
+
+- (void)adLoader:(GADAdLoader *)adLoader didReceiveDFPBannerView:(DFPBannerView *)bannerView {
+    [self hideLoaderFromScreen];
+    NSLog(@"AdLoader did receive dfp banner view");
+
+    dfpBannerView = bannerView;
+    [[self adView] addSubview:dfpBannerView];
+    [self applyAdViewContraints:dfpBannerView height:GAD_SIZE_320x50.height width:GAD_SIZE_320x50.width];
+}
+
+- (NSArray<NSValue *> *)validBannerSizesForAdLoader:(GADAdLoader *)adLoader {
+    GADAdSize dfpAdSize = kGADAdSizeBanner;
+    return @[ [NSValue value:&dfpAdSize withObjCType:@encode(GADAdSize)] ];
+}
+
+- (void)adLoader:(GADAdLoader *)adLoader didReceiveNativeAd:(GADUnifiedNativeAd *)nativeAd {
+    [self hideLoaderFromScreen];
+    NSLog(@"AdLoader did receive dfp banner view");
+}
+
+- (void)adLoader:(GADAdLoader *)adLoader didReceiveUnifiedNativeAd:(GADUnifiedNativeAd *)nativeAd {
+}
 @end

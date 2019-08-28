@@ -28,10 +28,9 @@
 		AE9866AE20F361AE00119944 /* MNURLConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866AD20F361AE00119944 /* MNURLConfigViewController.m */; };
 		AE9866B120F362EF00119944 /* MNDemoConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866B020F362EF00119944 /* MNDemoConstants.m */; };
 		AE9866B420F3642A00119944 /* MNTestDevicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866B320F3642A00119944 /* MNTestDevicesManager.m */; };
-		C86C95A4215CCE470016A736 /* MNetDfpHbSdkUItest.m in Sources */ = {isa = PBXBuildFile; fileRef = C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */; };
 		C882F974217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */; };
 		C882F976217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */; };
-		C8DE5B28216C956600CF7BEC /* MNetInternetFailureUITest.m in Sources */ = {isa = PBXBuildFile; fileRef = C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */; };
+		C8BA668421941956004EAC8B /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8BA668321941956004EAC8B /* AFNetworking.framework */; };
 		EB6C4DEB84414B7FD9791556 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,10 +86,9 @@
 		AE9866B220F3642A00119944 /* MNTestDevicesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNTestDevicesManager.h; sourceTree = "<group>"; };
 		AE9866B320F3642A00119944 /* MNTestDevicesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNTestDevicesManager.m; sourceTree = "<group>"; };
 		BDAF4EABA83F5946A0A3EFC1 /* Pods-MNetDfpHbSdk_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpHbSdkUItest.m; sourceTree = "<group>"; };
 		C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpBannerAdParameterTest.m; sourceTree = "<group>"; };
 		C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetMNetDfpInterstitialAdParameterTest.m; sourceTree = "<group>"; };
-		C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetInternetFailureUITest.m; sourceTree = "<group>"; };
+		C8BA668321941956004EAC8B /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC673DA51C8CB3213AFCEFE3 /* Pods-MNetDfpHbSdk_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DC849EC681D8B70B9552B9F4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8BA668421941956004EAC8B /* AFNetworking.framework in Frameworks */,
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -145,6 +144,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8BA668321941956004EAC8B /* AFNetworking.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
@@ -196,9 +196,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C86C95A3215CCE470016A736 /* MNetDfpHbSdkUItest.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
-				C8DE5B27216C956600CF7BEC /* MNetInternetFailureUITest.m */,
 				AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */,
 				C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */,
 				C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */,
@@ -305,6 +303,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -465,8 +464,6 @@
 			files = (
 				C882F976217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m in Sources */,
 				C882F974217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m in Sources */,
-				C86C95A4215CCE470016A736 /* MNetDfpHbSdkUItest.m in Sources */,
-				C8DE5B28216C956600CF7BEC /* MNetInternetFailureUITest.m in Sources */,
 				AE337BB1217DC7A60042ADB2 /* MNetDfpFilterTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,6 +656,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(FRAMEWORK_SEARCH_PATHS) '@executable_path/Frameworks' '@loader_path/Frameworks'";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MNetDfpHbSdk_Example.app/MNetDfpHbSdk_Example";
@@ -679,6 +677,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(FRAMEWORK_SEARCH_PATHS) '@executable_path/Frameworks' '@loader_path/Frameworks'";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MNetDfpHbSdk_Example.app/MNetDfpHbSdk_Example";

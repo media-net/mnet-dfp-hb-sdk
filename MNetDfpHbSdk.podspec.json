@@ -22,7 +22,7 @@
         "CoreTelephony",
         "WebKit"
     ],
-    "homepage": "https://github.com/media-net/ios-dfp-hb-sdk",
+    "homepage": "https://github.com/media-net/mnet-dfp-hb-sdk.git",
     "ios": {
         "vendored_frameworks": "MNetDfpHbSdk/ios/MNetDfpHbSdk.framework"
     },
@@ -32,12 +32,12 @@
     },
     "name": "MNetDfpHbSdk",
     "platforms": {
-        "ios": "8.0"
+        "ios": "9.0"
     },
     "source": {
         "git": "https://github.com/media-net/mnet-dfp-hb-sdk.git",
-        "tag": "1.0.15"
+        "tag": "1.1.0"
     },
     "summary": "MNetDfpHbSdk - A DFP header-bidding sdk",
-    "version": "1.0.15"
+    "version": "1.1.0"
 }
