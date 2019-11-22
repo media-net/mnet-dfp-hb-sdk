@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E47375741D65A5540D2B499 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC48AE7E8394CB0F1DDFAAC /* Pods_MNetDfpHbSdk_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -21,7 +22,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		AB282053A5D43A69F1AEFCF5 /* Pods_MNetDfpHbSdk_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9468F65DA597D5CBF52F5D0A /* Pods_MNetDfpHbSdk_Example.framework */; };
+		9B7791C8BCB01EB338AA3659 /* Pods_MNetDfpHbSdk_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5EB26CD0F307C78BB8144B /* Pods_MNetDfpHbSdk_Example.framework */; };
 		AE337BB1217DC7A60042ADB2 /* MNetDfpFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */; };
 		AE9866A820F360CF00119944 /* MNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866A720F360CF00119944 /* MNViewController.m */; };
 		AE9866AB20F3614E00119944 /* MNShowAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9866AA20F3614E00119944 /* MNShowAdViewController.m */; };
@@ -31,7 +32,6 @@
 		C882F974217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C882F973217F1CAB00FCA51F /* MNetDfpBannerAdParameterTest.m */; };
 		C882F976217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C882F975217F338100FCA51F /* MNetMNetDfpInterstitialAdParameterTest.m */; };
 		C8BA668421941956004EAC8B /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8BA668321941956004EAC8B /* AFNetworking.framework */; };
-		EB6C4DEB84414B7FD9791556 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,7 @@
 
 /* Begin PBXFileReference section */
 		0B95C3DA818D2FEDEA1B4A3C /* Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F5EB26CD0F307C78BB8144B /* Pods_MNetDfpHbSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35546CE472AE6E06815FEAB0 /* Pods_MNetDfpHbSdk_Example_MNetDfpHbSdk_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Example_MNetDfpHbSdk_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B315F28E00F0906FE33CD7C /* Pods-MNetDfpHbSdk_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* MNetDfpHbSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MNetDfpHbSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +71,6 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8FF9CCD8993C0E3349D82CB8 /* Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests/Pods-MNetDfpHbSdk_Example-MNetDfpHbSdk_UITests.release.xcconfig"; sourceTree = "<group>"; };
 		91676BE5883E0E93580AA7C9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		9468F65DA597D5CBF52F5D0A /* Pods_MNetDfpHbSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98CFC1A18F4F6257A75934CE /* Pods-MNetDfpHbSdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AB7FA41AE34DA0BFBD8230D5 /* MNetDfpHbSdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MNetDfpHbSdk.podspec; path = ../MNetDfpHbSdk.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AE337BB0217DC7A60042ADB2 /* MNetDfpFilterTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNetDfpFilterTest.m; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		C8BA668321941956004EAC8B /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC673DA51C8CB3213AFCEFE3 /* Pods-MNetDfpHbSdk_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MNetDfpHbSdk_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DC849EC681D8B70B9552B9F4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		EEC48AE7E8394CB0F1DDFAAC /* Pods_MNetDfpHbSdk_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MNetDfpHbSdk_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				AB282053A5D43A69F1AEFCF5 /* Pods_MNetDfpHbSdk_Example.framework in Frameworks */,
+				9B7791C8BCB01EB338AA3659 /* Pods_MNetDfpHbSdk_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +113,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				EB6C4DEB84414B7FD9791556 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */,
+				2E47375741D65A5540D2B499 /* Pods_MNetDfpHbSdk_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,9 +149,9 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				9468F65DA597D5CBF52F5D0A /* Pods_MNetDfpHbSdk_Example.framework */,
-				0FFF54B48180C3280E9B2AA5 /* Pods_MNetDfpHbSdk_Tests.framework */,
 				35546CE472AE6E06815FEAB0 /* Pods_MNetDfpHbSdk_Example_MNetDfpHbSdk_UITests.framework */,
+				0F5EB26CD0F307C78BB8144B /* Pods_MNetDfpHbSdk_Example.framework */,
+				EEC48AE7E8394CB0F1DDFAAC /* Pods_MNetDfpHbSdk_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -248,8 +248,8 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				A4D57476EB1EBA1B7ED447B8 /* [CP] Embed Pods Frameworks */,
 				AEC1A6CD20F5EB1100DCF404 /* ShellScript */,
+				F1346A6328D24D2C1D4FA44B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -268,7 +268,7 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				BE522EAE7100C79DCACC1B04 /* [CP] Embed Pods Frameworks */,
+				21C89FE6F347A8B7034C32DD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,6 +341,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21C89FE6F347A8B7034C32DD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KIF/KIF.framework",
+				"${BUILT_PRODUCTS_DIR}/NetworkEye/NetworkEye.framework",
+				"${BUILT_PRODUCTS_DIR}/Nocilla/Nocilla.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KIF.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkEye.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nocilla.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		39B182D184EE26668F514EF4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,34 +399,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A4D57476EB1EBA1B7ED447B8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/MNALApplink/MNALApplink.framework",
-				"${BUILT_PRODUCTS_DIR}/MNetBaseAdSdk/MNetBaseAdSdk.framework",
-				"${BUILT_PRODUCTS_DIR}/MNetJSONModeller/MNetJSONModeller.framework",
-				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNALApplink.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNetBaseAdSdk.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNetJSONModeller.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AEC1A6CD20F5EB1100DCF404 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,26 +412,36 @@
 			shellPath = /bin/sh;
 			shellScript = "# Clang-formatting the code\n\nif ! [ -x \"$(command -v clang-format)\" ]; then\necho 'Error: clang-format is not installed. Skipping formatting'\nexit 0\nfi\n\narray=( $(find ../MNetDfpHbSdk \\( -name '*.h' -or -name '*.m' -or -name '*.mm' \\)) )\narray+=( $(find MNetDfpHbSdk \\( -name '*.h' -or -name '*.m' -or -name '*.mm' \\)) )\n\n# loop over it\nfor i in ${array[@]}\ndo\nif [ -f \"$i\" ]\nthen\nclang-format -i -style=\"{BasedOnStyle: LLVM, IndentWidth: 4 ,ColumnLimit: 120,AlignAfterOpenBracket : Align,AlignTrailingComments : true,AlignConsecutiveAssignments : true,PointerAlignment : Right,SpaceAfterCStyleCast : true,SpaceBeforeAssignmentOperators : true,SpaceInEmptyParentheses :  false,SpacesBeforeTrailingComments : 1,SpacesInCStyleCastParentheses : false,ObjCSpaceAfterProperty : true,ReflowComments : true,SortIncludes : true}\" $i\n\nfi\ndone";
 		};
-		BE522EAE7100C79DCACC1B04 /* [CP] Embed Pods Frameworks */ = {
+		F1346A6328D24D2C1D4FA44B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KIF/KIF.framework",
-				"${BUILT_PRODUCTS_DIR}/NetworkEye/NetworkEye.framework",
-				"${BUILT_PRODUCTS_DIR}/Nocilla/Nocilla.framework",
+				"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MNetBaseAdSdk/MNetBaseAdSdk.framework",
+				"${BUILT_PRODUCTS_DIR}/MNetDfpHbSdk/MNetDfpHbSdk.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KIF.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkEye.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nocilla.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNetBaseAdSdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNetDfpHbSdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Tests/Pods-MNetDfpHbSdk_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MNetDfpHbSdk_Example/Pods-MNetDfpHbSdk_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

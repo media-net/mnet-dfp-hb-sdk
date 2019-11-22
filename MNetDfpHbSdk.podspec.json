@@ -36,8 +36,8 @@
     },
     "source": {
         "git": "https://github.com/media-net/mnet-dfp-hb-sdk.git",
-        "tag": "1.1.1"
+        "tag": "1.1.2"
     },
     "summary": "MNetDfpHbSdk - A DFP header-bidding sdk",
-    "version": "1.1.1"
+    "version": "1.1.2"
 }

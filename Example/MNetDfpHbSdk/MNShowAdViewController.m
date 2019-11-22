@@ -94,6 +94,7 @@ static NSString *gadInterstitialDismissAd = @"Ad dismissed";
 
 static NSArray<NSString *> *testDevicesList;
 
+static dispatch_queue_t concQ;
 - (void)loadDevicesList {
     NSMutableArray<NSString *> *devicesList = [@[
         // Iphone 5s
@@ -135,7 +136,7 @@ static NSArray<NSString *> *testDevicesList;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initTitleMap];
-
+    concQ = dispatch_queue_create("demo_concurrent_queue", DISPATCH_QUEUE_CONCURRENT);
     [self handleButtonStatesForAdType];
     NSNumber *adTypeNum  = ENUM_VAL(self.adType);
     NSString *adTitleStr = [titleStringMap objectForKey:adTypeNum];
@@ -216,23 +217,23 @@ static NSArray<NSString *> *testDevicesList;
         [request setBirthday:[NSDate dateWithTimeIntervalSince1970:4]];
 #pragma GCC diagnostic pop
         [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
+        /*
+                [request setKeywords:@[
+                    @"sports", @"scores", @"content_link:http://mnadsdkdemo.beta.media.net.imnapp/dfp_keywords"
+                ]];
 
-        [request setKeywords:@[
-            @"sports", @"scores", @"content_link:http://mnadsdkdemo.beta.media.net.imnapp/dfp_keywords"
-        ]];
-
-        NSString *label                         = DFP_CUSTOM_EVENT_LABEL;
-        GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
-        [customEventExtras setExtras:@{
-            @"author" : @"hawking",
-            @"shape" : @"saddle",
-            @"element" : @"universe",
-            @"content_link" : @"http://mnadsdkdemo.beta.media.net.imnapp/dfp_event_extras",
-        }
-                            forLabel:label];
-        NSLog(@"%@", [customEventExtras extrasForLabel:label]);
-        [request registerAdNetworkExtras:customEventExtras];
-
+                NSString *label                         = DFP_CUSTOM_EVENT_LABEL;
+                GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
+                [customEventExtras setExtras:@{
+                    @"author" : @"hawking",
+                    @"shape" : @"saddle",
+                    @"element" : @"universe",
+                    @"content_link" : @"http://mnadsdkdemo.beta.media.net.imnapp/dfp_event_extras",
+                }
+                                    forLabel:label];
+                NSLog(@"%@", [customEventExtras extrasForLabel:label]);
+                [request registerAdNetworkExtras:customEventExtras];
+        */
         // Manual header bidding
         [MNetDfpBidder addBidsToDfpBannerAdRequest:request
                                         withAdView:dfpBannerView
@@ -340,6 +341,11 @@ static NSArray<NSString *> *testDevicesList;
         break;
     }
 
+    case CONCURRENT_GAD_DFP: {
+        [self runAddBidsMultipleTimes];
+        break;
+    }
+
     case MNET_AUTOMATION_DFP_ADVIEW: {
         [self addLoaderToScreen];
 
@@ -359,6 +365,60 @@ static NSArray<NSString *> *testDevicesList;
         [self hideLoaderFromScreen];
         [self showTestDeviceAlertView];
     }
+    }
+}
+
+- (void)runAddBidsMultipleTimes {
+    gadAdLoader =
+        [[GADAdLoader alloc] initWithAdUnitID:DEMO_DFP_AD_UNIT_ID
+                           rootViewController:self
+                                      adTypes:@[ kGADAdLoaderAdTypeDFPBanner, kGADAdLoaderAdTypeUnifiedNative ]
+                                      options:nil];
+    gadAdLoader.delegate = self;
+
+    DFPRequest *request = [DFPRequest request];
+    [request setCustomTargeting:@{@"pos" : @"1006"}];
+    [request setTestDevices:testDevicesList];
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+    [request setGender:kGADGenderFemale];
+    [request setBirthday:[NSDate dateWithTimeIntervalSince1970:4]];
+#pragma GCC diagnostic pop
+    [request setLocationWithLatitude:LATITUDE longitude:LONGITUDE accuracy:5];
+
+    [request setKeywords:@[ @"sports", @"scores" ]];
+
+    NSString *label                         = DFP_CUSTOM_EVENT_LABEL;
+    GADCustomEventExtras *customEventExtras = [[GADCustomEventExtras alloc] init];
+    [customEventExtras setExtras:@{
+        @"author" : @"hawking",
+        @"shape" : @"saddle",
+        @"element" : @"universe"
+        //@"content_link" : @"http://mnadsdkdemo.beta.media.net.imnapp/dfp_event_extras",
+    }
+                        forLabel:label];
+    NSLog(@"%@", [customEventExtras extrasForLabel:label]);
+    [request registerAdNetworkExtras:customEventExtras];
+
+    GADAdSize dfpAdSize = kGADAdSizeBanner;
+
+    void (^addBidsBlock)(void) = ^void {
+      // Manual header bidding
+      [MNetDfpBidder addBidsToAdRequest:request
+                        withGADAdLoader:gadAdLoader
+                            withAdSizes:@[ NSValueFromGADAdSize(dfpAdSize) ]
+                     rootViewController:self
+                  withCompletionHandler:^(DFPRequest *modifiedRequest, GADAdLoader *adLoader, NSError *error) {
+                    if (error) {
+                        NSLog(@"ADD_BIDS_ERROR: Error when adding bids to request - %@", error);
+                    }
+
+                    NSLog(@"Got modified dfp request with ad laoder");
+                  }];
+    };
+    for (int i = 0; i < 20; i++) {
+        NSLog(@"Adding task: %d", i);
+        dispatch_async(concQ, addBidsBlock);
     }
 }
 

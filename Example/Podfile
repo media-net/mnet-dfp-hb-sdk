@@ -1,5 +1,4 @@
 use_frameworks!
-
 source 'https://github.com/media-net/mnet-pod-specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
@@ -21,6 +20,18 @@ end
 # Kindly ignore this if the framework is being used
 # NOTE: Make sure that when testing the framework app, this is removed
 pre_install do |installer|
+
+  # NOTE: Replace verify_no_static_framework_transitive_dependencies method definition with {} for ad-sdk to build
+  installer.pod_targets.each do |pod|
+        if pod.name == "MNetDfpHbSdk"
+            puts "********************"
+            puts "*** Overriding the verify_no_static_framework_transitive_dependencies method for MNetDfpHbSdk ***"
+            puts "********************"
+            Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+        end
+      end
+
+  # NOTE: We do not need DFP_POD_FMK='NO' for ad-sdk to build. Do not remove this code, may be used in future. 
   if ENV['DFP_POD_FMK'] == "NO"
       installer.pod_targets.each do |pod|
         if pod.name == "MNetDfpHbSdk"
